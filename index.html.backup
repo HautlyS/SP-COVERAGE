@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EARTH GUARDIANS | SP COVERAGE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #050505;
+            --lime: #d1ff00;
+            --pink: #ff0055;
+            --paper: #e8e8e8;
+            --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: var(--paper);
+            font-family: 'Space Mono', monospace;
+            overflow: hidden;
+            height: 100vh;
+            text-transform: uppercase;
+        }
+
+        /* Wheatpaste Texture Overlay */
+        .texture-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: var(--grain);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 1000;
+            mix-blend-mode: overlay;
+            will-change: opacity;
+        }
+
+        .paper-grain {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Layout Architecture */
+        .app-container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            padding: 20px;
+            gap: 20px;
+            contain: layout style;
+        }
+
+        /* HUD Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-top: 10px;
+            z-index: 1;
+            contain: layout style;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            line-height: 0.8;
+            color: var(--lime);
+            text-shadow: 3px 3px 0px var(--pink);
+        }
+
+        .system-specs {
+            text-align: right;
+            font-size: 0.65rem;
+            line-height: 1.4;
+            letter-spacing: 1px;
+            color: rgba(232, 232, 232, 0.6);
+        }
+
+        /* Tectonic Slide System */
+        main {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            contain: layout style paint;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            gap: 15px;
+            opacity: 0;
+            transform: scale(1.1) rotate(2deg);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: none;
+            contain: layout style paint;
+            will-change: opacity, transform;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            pointer-events: all;
+            z-index: 200;
+        }
+
+        /* Neobrutalist Blocks */
+        .block {
+            background: var(--paper);
+            color: var(--obsidian);
+            padding: 20px;
+            border: 2px solid var(--obsidian);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, filter 0.25s ease, border-color 0.25s ease;
+            contain: layout style;
+        }
+
+        .block-lime { background: var(--lime); }
+        .block-lime:hover { filter: invert(1) hue-rotate(180deg); }
+
+        .block-pink { background: var(--pink); color: white; }
+        .block-pink:hover { filter: invert(1) hue-rotate(180deg); }
+
+        .block-dark { background: #111; color: var(--paper); border: 2px solid var(--paper); }
+        .block-dark:hover { filter: invert(1) hue-rotate(180deg); }
+
+        .block-white { background: #f5f5f5; color: var(--obsidian); }
+        .block-white:hover { filter: invert(1) hue-rotate(180deg); }
+
+        .title-xl {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2rem, 8vw, 10rem);
+            line-height: 0.8;
+            letter-spacing: -5px;
+            word-break: break-all;
+        }
+
+        .friction-text {
+            mix-blend-mode: difference;
+            color: var(--lime);
+        }
+
+        /* Poster Elements */
+        .poster-frame {
+            grid-column: span 6;
+            grid-row: span 12;
+            background: #222;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(1) contrast(1.5);
+            transition: 0.5s;
+            contain: layout style paint;
+        }
+
+        .poster-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, var(--pink) 0%, transparent 100%);
+            mix-blend-mode: multiply;
+            opacity: 0.6;
+        }
+
+        .poster-frame:hover {
+            filter: grayscale(0) contrast(1.1);
+        }
+
+        /* ===== SLIDESHOW GALLERY ===== */
+        .gallery {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 90px);
+            background: #000;
+            overflow: hidden;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .gallery-slide img,
+        .gallery-slide video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border: 3px solid var(--lime);
+            box-shadow: 8px 8px 0 var(--pink);
+        }
+
+        .gallery-slide.video-slide::after {
+            content: '▶ VIDEO';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--obsidian);
+            color: var(--lime);
+            padding: 6px 12px;
+            border: 2px solid var(--lime);
+            font-size: 0.7rem;
+            font-weight: 700;
+            box-shadow: 3px 3px 0 var(--pink);
+        }
+
+        /* ===== THUMBNAIL STRIP ===== */
+        .thumb-strip-container {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            padding: 8px;
+            border-top: 3px solid var(--lime);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .thumb-strip {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            flex: 1;
+            padding: 4px 0;
+            scroll-behavior: smooth;
+        }
+
+        .thumb-strip::-webkit-scrollbar {
+            height: 4px;
+        }
+        .thumb-strip::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        .thumb-strip::-webkit-scrollbar-thumb {
+            background: var(--lime);
+        }
+
+        .thumb-strip .icon {
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .thumb-strip .icon:hover {
+            transform: scale(1.1);
+            border-color: var(--pink);
+        }
+
+        .thumb-strip .icon.active {
+            border-color: var(--lime);
+            box-shadow: 0 0 0 3px rgba(209,255,0,0.3);
+        }
+
+        .thumb-strip .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .thumb-strip .icon .video-indicator {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            background: var(--pink);
+            color: white;
+            font-size: 0.5rem;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .strip-nav-btn {
+            background: var(--lime);
+            border: none;
+            color: var(--obsidian);
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .strip-nav-btn:hover {
+            background: var(--pink);
+            color: white;
+        }
+
+        .strip-info {
+            font-size: 0.65rem;
+            color: var(--lime);
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        /* ===== HIGH PERFORMANCE LIGHTBOX / MODAL ===== */
+        .gallery-modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.92);
+            z-index: 5000;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.2s ease forwards;
+            contain: strict;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .gallery-modal .modal-panel {
+            max-width: 95%;
+            max-height: 95%;
+            width: min(1200px, 95%);
+            background: transparent;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            contain: layout style;
+        }
+
+        .modal-media-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: 75vh;
+            max-width: 100%;
+            contain: strict;
+        }
+
+        .modal-media {
+            max-width: 100%;
+            max-height: 75vh;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            contain: strict;
+        }
+
+        .modal-media.video {
+            border-radius: 8px;
+        }
+
+        /* Modal Controls */
+        .modal-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 14px;
+            width: 100%;
+            padding: 0 20px;
+            contain: layout style;
+        }
+
+        .modal-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            contain: layout style;
+        }
+
+        .modal-btn:hover {
+            background: var(--lime);
+            color: var(--obsidian);
+            border-color: var(--lime);
+        }
+
+        .modal-btn.fullscreen-btn {
+            background: rgba(209,255,0,0.2);
+            border-color: var(--lime);
+        }
+
+        .modal-btn.fullscreen-btn:hover {
+            background: var(--lime);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            contain: layout style;
+        }
+
+        .modal-close:hover {
+            background: var(--pink);
+            border-color: var(--pink);
+            transform: rotate(90deg);
+        }
+
+        /* Modal Thumbnail Strip */
+        .modal-thumb-strip {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 6px 0;
+            max-width: 100%;
+            scroll-behavior: smooth;
+            contain: strict;
+        }
+
+        .modal-thumb-strip::-webkit-scrollbar {
+            height: 4px;
+        }
+        .modal-thumb-strip::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        .modal-thumb-strip::-webkit-scrollbar-thumb {
+            background: var(--lime);
+            border-radius: 2px;
+        }
+
+        .modal-thumb {
+            width: 52px;
+            height: 52px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            position: relative;
+            contain: layout style paint;
+        }
+
+        .modal-thumb:hover {
+            transform: scale(1.05);
+            border-color: var(--lime);
+        }
+
+        .modal-thumb.active {
+            border-color: var(--lime);
+            box-shadow: 0 0 0 2px rgba(209,255,0,0.4);
+        }
+
+        .modal-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #1a1a1a;
+            contain: strict;
+        }
+
+        .modal-thumb .video-dot {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            width: 10px;
+            height: 10px;
+            background: var(--pink);
+            border-radius: 50%;
+            contain: layout style;
+        }
+
+        /* Modal Info */
+        .modal-info {
+            text-align: center;
+            margin-top: 10px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+            contain: layout style;
+        }
+
+        .modal-counter {
+            color: var(--lime);
+            font-weight: bold;
+        }
+
+        /* Nav & Progress */
+        footer {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            z-index: 100;
+            contain: layout style;
+        }
+
+        .nav-trigger {
+            background: var(--paper);
+            border: none;
+            padding: 15px 40px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+            transition: 0.3s;
+        }
+
+        .nav-trigger:hover {
+            background: var(--lime);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0; left: 0; height: 100%;
+            background: var(--lime);
+            width: 25%;
+            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        /* Specific Component Styles */
+        .crew-tag {
+            font-size: 0.7rem;
+            font-weight: bold;
+            border: 1px solid currentColor;
+            padding: 2px 6px;
+            align-self: flex-start;
+        }
+
+        .glitch-static {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+        }
+
+        .number-large {
+            font-family: 'Syne', sans-serif;
+            font-size: 6rem;
+            line-height: 1;
+            margin-top: -20px;
+        }
+
+        /* ===== PROFILE PHOTO WITH LIQUID/MASKED STAR EFFECT ===== */
+        .profile-photo-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            z-index: 10;
+            contain: layout style;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--obsidian);
+            transition: transform 0.3s ease;
+        }
+
+        /* Liquid/Masked Star Effect */
+        .profile-photo-container::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(45deg, var(--lime), var(--pink), var(--lime));
+            border-radius: 50%;
+            z-index: -1;
+            animation: liquidPulse 3s ease-in-out infinite;
+        }
+
+        .profile-photo-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35' fill='white' opacity='0.3'/%3E%3C/svg%3E");
+            background-size: 30px 30px;
+            mix-blend-mode: overlay;
+            border-radius: 50%;
+            animation: starSpin 10s linear infinite;
+        }
+
+        @keyframes liquidPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(1.05) rotate(-5deg); opacity: 0.8; }
+            75% { transform: scale(1.08) rotate(3deg); }
+        }
+
+        @keyframes starSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-photo-container:hover .profile-photo {
+            transform: scale(1.2);
+        }
+
+        /* ===== BADGE ICON BUTTON ===== */
+        .badge-link {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+            display: block;
+            z-index: 15;
+            transition: transform 0.3s ease;
+        }
+
+        .badge-link:hover {
+            transform: scale(1.3) rotate(-10deg);
+        }
+
+        .badge-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ===== ENHANCED DEMANDS SECTION ===== */
+        .demands-header {
+            grid-column: span 12;
+            grid-row: span 2;
+            background: linear-gradient(135deg, var(--obsidian) 0%, #1a1a1a 100%);
+            color: var(--paper);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px solid var(--lime);
+            position: relative;
+            overflow: hidden;
+            z-index: 99999;
+            
+        }
+
+        .demands-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='2' fill='rgba(209,255,0,0.3)'/%3E%3C/svg%3E") repeat;
+            background-size: 30px 30px;
+            animation: float 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-30px); }
+        }
+
+        .demands-header h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            color: var(--lime);
+            text-shadow: 4px 4px 0px var(--pink), 0 0 20px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 10000 !important;
+            margin: 0;
+        }
+
+        .demands-header .subtitle {
+            font-size: 0.8rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0,0,0,0.9);
+            margin-top: 10px;
+            position: relative;
+            z-index: 10000 !important;
+        }
+
+        /* Demand Cards */
+        .demand-card {
+            grid-column: span 4;
+            grid-row: span 5;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: #1a1a1a;
+            color: #ffffff;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .demand-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .demand-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .demand-card.demand-1::before { background: var(--lime); }
+        .demand-card.demand-1 { border-left: 3px solid var(--lime); }
+        .demand-card.demand-2::before { background: #00d4ff; }
+        .demand-card.demand-2 { border-left: 3px solid #00d4ff; }
+        .demand-card.demand-3::before { background: var(--pink); }
+        .demand-card.demand-3 { border-left: 3px solid var(--pink); }
+        .demand-card.demand-4::before { background: #ff9500; }
+        .demand-card.demand-4 { border-left: 3px solid #ff9500; }
+        .demand-card.demand-5::before { background: #9b59b6; }
+        .demand-card.demand-5 { border-left: 3px solid #9b59b6; }
+        .demand-card.demand-6::before { background: #2ecc71; }
+        .demand-card.demand-6 { border-left: 3px solid #2ecc71; }
+        
+        /* Demand 2, 4, 6 with different border colors */
+        .demand-card.demand-2 { border-left: 3px solid #00d4ff; }
+        .demand-card.demand-4 { border-left: 3px solid #ff9500; }
+        .demand-card.demand-6 { border-left: 3px solid #2ecc71; }
+
+        .demand-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            z-index: 10;
+            position: relative;
+            display: block;
+        }
+
+        .demand-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            opacity: 0.2;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            z-index: 10;
+            color: inherit;
+            line-height: 1;
+        }
+
+        .demand-card h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            color: #ffffff;
+            z-index: 10;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .demand-card p {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            opacity: 1;
+            color: #e0e0e0;
+            z-index: 10;
+            position: relative;
+            flex-grow: 1;
+        }
+
+        /* ===== Redesigned Demands Page Styles ===== */
+        .demands-hero {
+            grid-column: span 12;
+            grid-row: span 3;
+            background: linear-gradient(135deg, rgba(209,255,0,0.06), rgba(255,0,85,0.04));
+            border: 2px solid rgba(209,255,0,0.12);
+            padding: 28px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .demands-hero .hero-text h2 { font-family: 'Archivo Black'; font-size: 2.6rem; color: var(--lime); margin:0; }
+        .demands-hero .hero-text p { font-size: 0.95rem; color: #f0f0f0; max-width: 70%; }
+
+        .demand-grid {
+            grid-column: span 12;
+            grid-row: span 9;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            align-items:stretch;
+        }
+
+        .demand-card.visual {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.36s ease, box-shadow 0.36s ease;
+        }
+
+        .demand-card.visual:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+
+        .demand-card.visual .icon {
+            font-size: 2.4rem;
+            width: 56px;
+            height: 56px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.12));
+            color: var(--lime);
+            flex-shrink: 0;
+        }
+
+        .demand-card.visual h3 { font-family: 'Archivo Black'; font-size: 1.1rem; margin: 0; color: var(--paper); }
+
+        .demand-card.visual .lead { font-size: 0.85rem; color: #dcdcdc; opacity:0.95; }
+
+        .demand-number-badge {
+            position: absolute; top: 12px; right: 12px; font-family: 'Syne'; font-weight:800;
+            font-size: 2rem; color: rgba(255,255,255,0.06);
+        }
+
+        /* Modal / Details */
+        .demand-modal {
+            position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 3000;
+            background: rgba(0,0,0,0.6);
+            padding: 40px;
+        }
+
+        .demand-modal.active { display: flex; }
+
+        .demand-modal .panel {
+            background: #0f0f0f; border: 2px solid var(--lime); padding: 28px; max-width: 900px; width: 100%; color: var(--paper);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+        }
+
+        .demand-modal .panel h3 { font-family: 'Archivo Black'; font-size: 1.8rem; margin: 0 0 10px 0; }
+        .demand-modal .panel p { font-size: 1rem; line-height: 1.6; }
+
+        @media (max-width: 900px) {
+            .demand-grid { grid-template-columns: 1fr; }
+            .demands-hero .hero-text p { max-width: 100%; }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            grid-column: span 12;
+            grid-row: span 5;
+            background: linear-gradient(180deg, var(--obsidian) 0%, #1a1a1a 100%);
+            color: var(--paper);
+            top-padding: 30px;
+            display: flex;
+            gap: 30px;
+            border: 2px solid var(--paper);
+            overflow: hidden;
+        }
+
+        .cta-content {
+            flex: 1;
+            padding-right: 20px;
+        }
+        .cta-content h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            color: var(--lime);
+            margin-bottom: 15px;
+        }
+
+        .cta-content p {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .action-item:hover {
+            background: rgba(209,255,0,0.1);
+            border-color: var(--lime);
+        }
+
+        .action-icon {
+            font-size: 1.5rem;
+        }
+
+        .action-text {
+            font-size: 0.75rem;
+        }
+
+        .action-text {
+            flex: 1;
+        }
+        .action-text strong {
+            display: block;
+            color: var(--lime);
+            margin-bottom: 3px;
+        }
+
+        /* Hashtag Banner */
+        .hashtag-banner {
+            grid-column: span 12;
+            grid-row: span 1;
+            background: var(--pink);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .slide { display: flex; flex-direction: column; overflow-y: auto; }
+            .poster-frame { height: 300px; }
+            .title-xl { font-size: 4rem; letter-spacing: -2px; }
+            .app-container { padding: 10px; }
+            .demand-card { grid-column: span 6; }
+            .cta-section { flex-direction: column; }
+            .cta-content, .cta-actions { flex: none; width: 100%; }
+            .thumb-strip .icon { width: 40px; height: 40px; }
+        }
+
+        @media (max-width: 600px) {
+            .thumb-strip .icon { width: 36px; height: 36px; }
+            .modal-thumb { width: 44px; height: 44px; }
+        }
+
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="texture-overlay"></div>
+    <div class="paper-grain"></div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">EARTH<br>GUARDIANS</div>
+            <div class="logo" style="margin-top: 1vh;">.:EG SOUTH AMERICA:. </div>
+
+            <div class="system-specs">
+                CLIMATE MARCH<br>
+                MASSIVE ATTACK + INDIGENOUS INITIATIVE<br>
+                APIB - EG - SOS <span style="color: var(--lime)">PARTNERSHIP</span><br>
+                <span id="clock">00:00:00</span>
+            </div>
+        </header>
+
+        <main id="presentation-root">
+            <!-- SLIDE 1: MANIFESTO -->
+            <section class="slide active">
+                <div class="block block-lime" style="grid-column: span 7; grid-row: span 8;">
+                    <div class="crew-tag">COP 30: INDIGENOUS ACTION - MASSIVE ATTACK 2025 - COLLABORATIVE COVERAGE</div>
+                    <h1 class="title-xl">THE<br>ANSWER<br>IS US<span style="color:var(--pink)">.</span></h1>
+                </div>
+                <div class="poster-frame" style="grid-column: span 5; grid-row: span 12; background-image: url('photos/IMG_20251114_135842.jpg');">
+                    <div class="glitch-static"></div>
+                </div>
+                <div class="block block-dark" style="grid-column: span 4; grid-row: span 4;">
+                    <p style="font-size: 0.9rem; line-height: 1.2;"><br>.:Mobilizing:. <br><br>youth for COP30 actions <br> Indigenous Initiative + Massive Attack<br><br> Decentralized resistance <br> community-driven + network <br><br> .:DOC:. EG SOUTH AMERICA 12 YEARS OF ACTIVITY:.</p>
+                </div>
+                <div class="block block-pink" style="grid-column: span 3; grid-row: span 4; text-align: center; justify-content: center;">
+                    <span style="font-weight: 800; font-size: 1.5rem;">Global<br>Climate March<br>2025</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: COALITION WITH PROFILE PHOTOS & BADGES -->
+            <section class="slide">
+                <div class="block block-lime" style="grid-column: span 12; grid-row: span 2;">
+                    <h2 class="title-xl" style="font-size: 3rem; letter-spacing: -2px; text-align: center;">EARTH GUARDIANS SOUTH AMERICA TEAM</h2>
+                </div>
+                
+                
+                
+                <!-- WALLACE -->
+                <div class="block block-white" data-href="https://www.instagram.com/wallk_555/" style="grid-column: span 4; grid-row: span 5;">
+                    <div class="profile-photo-container">
+                        <img src="photos/wallk.webp" alt="Wallace" class="profile-photo">
+                    </div>
+                    <a href="badge-wallace.png" class="badge-link" target="_blank" title="View Badge">
+                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    </a>
+                    <div class="crew-tag">CREW MEMBER</div>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">WALLACE</h3>
+                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Young Black Artist & Cultural Producer. Musician, painter, actor. Creates multimedia content connecting art and environmental justice. Youth voice in the movement.</p>
+                </div>
+                
+                
+                
+                <!-- TUPÃ LEVI -->
+                <div class="block block-dark" data-href="https://drive.google.com/file/d/12gEq8pBwTrwAD_oZ4Fsu1xGF1pJuesYW/view?usp=sharing" style="grid-column: span 4; grid-row: span 5;">
+                    <div class="profile-photo-container">
+                        <img src="photos/tups.jpg" alt="Tupã" class="profile-photo">
+                    </div>
+                    <a href="badge-tupa.png" class="badge-link" target="_blank" title="View Badge">
+                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    </a>
+                    <div class="crew-tag">RCC SOUTH AMERICA</div>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">TUPÃ LEVI</h3>
+                    <p style="font-size: 1rem; margin-top: 8px; color: #ffffff;">Regional Crew Councilor (South America). Born in Boca do Acre, AM. Artist, actor, musician, programmer. Technical documentation and audiovisual production lead.</p>
+                </div>
+                
+                                <!-- LEVI MOISÉS -->
+                                <div class="block block-pink" data-href="https://drive.google.com/file/d/1Q_zuwkFmySjFT4WpR6jcFiz8OE9uZR0A/view?usp=sharing" style="grid-column: span 4; grid-row: span 5;">
+                    <div class="profile-photo-container">
+                        <img src="photos/levi.webp" alt="Levi Moisés" class="profile-photo">
+                    </div>
+                    <a href="badge.png" class="badge-link" target="_blank" title="View Badge">
+                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    </a>
+                    <div class="crew-tag">CREW WISDOM ADVISER</div>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">LEVI KARMADRUM</h3>
+                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Cultural Activist, music professor, writer, director. Strategic planning and funding development.</p>
+                </div>
+                                <!-- ISADORA -->
+                                <div class="block block-white" data-href="https://drive.google.com/file/d/1ZCc26SisUZvi4ngli4ugGMAXGY3pVkkw/view?usp=sharing" style="grid-column: span 6; grid-row: span 5;">
+                    <div class="profile-photo-container">
+                        <img src="photos/isa.jpg" alt="Isadora" class="profile-photo">
+                    </div>
+                    <a href="badge-isadora.png" class="badge-link" target="_blank" title="View Badge">
+                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    </a>
+                    <div class="crew-tag">CREW LEADER</div>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">ISADORA</h3>
+                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Multidisciplinary Artist & Scientist. Actress, dancer, professor, biologist. Integrates scientific knowledge with artistic expression. Bridges academia and grassroots activism.</p>
+                </div>
+
+                                <!-- (NANCI) -->
+                                <div class="block block-pink" data-href="https://ditaferreira.github.io/dita-website/" style="grid-column: span 6; grid-row: span 5;">
+                    <div class="profile-photo-container">
+                        <img src="photos/dita.webp" alt="Nanci" class="profile-photo">
+                    </div>
+                    <a href="badge-nanci.png" class="badge-link" target="_blank" title="View Badge">
+                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    </a>
+                    <div class="crew-tag">CREW WISDOM ADVISER</div>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">NANCI FERREIRA</h3>
+                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Cultural Leadership. Bridge between ancestral Black wisdom traditions and contemporary environmental activism. Advisor on cultural protocols and ancestral practices.</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: MEDIA GALLERY -->
+            <section class="slide">
+                    <div class="poster-frame" style="grid-column: span 8; grid-row: span 12;">
+                        <div class="gallery" id="media-gallery"></div>
+                        <div class="thumb-strip-container">
+                            <button class="strip-nav-btn" id="strip-prev">◀</button>
+                            <div class="thumb-strip" id="thumb-strip"></div>
+                            <button class="strip-nav-btn" id="strip-next">▶</button>
+                            <span class="strip-info" id="strip-info">0 / 0</span>
+                        </div>
+
+                        <div class="block block-pink" style="position: absolute; bottom: 85px; right: -20px; width: 300px;">
+                            <h3 style="font-family: 'Archivo Black'">SOUTH AMERICA DOC</h3>
+                            <p style="font-size: 0.7rem">Documentary / YOUTH PRODUCTION - RESISTENCE</p>
+                        </div>
+                    </div>
+                <div class="block block-dark" style="grid-column: span 4; grid-row: span 4;">
+                    <div class="crew-tag">MEDIA_SABOTAGE</div>
+                    <p>Capturing the truth of the 2025 São Paulo Uprising.</p>
+                </div>
+                <div class="block block-lime" style="grid-column: span 4; grid-row: span 8;">
+                    <div class="number-large">03</div>
+                    <p style="font-weight: bold">ARCHIVE_ACCESS_GRANTED</p>
+                    <div style="margin-top: 20px; border-top: 2px solid black; padding-top: 10px; font-size: 0.8rem;">
+                        > 480 HOURS FOOTAGE<br>
+                        > 12 REGIONS<br>
+                        > 1 GOAL
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: ENHANCED DEMANDS -->
+            
+        </main>
+
+        <footer>
+            <button class="nav-trigger" onclick="changeSlide(-1)">[ BACK ]</button>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar"></div>
+            </div>
+            <button class="nav-trigger" onclick="changeSlide(1)">[ NEXT ]</button>
+        </footer>
+    </div>
+
+    <script>
+        // Performance optimization: Use requestAnimationFrame for animations
+        let currentIdx = 0;
+        const slides = document.querySelectorAll('.slide');
+        const bar = document.getElementById('progress-bar');
+
+        function updateUI() {
+            requestAnimationFrame(() => {
+                slides.forEach((s, i) => {
+                    s.classList.toggle('active', i === currentIdx);
+                });
+                const progress = ((currentIdx + 1) / slides.length) * 100;
+                bar.style.width = `${progress}%`;
+            });
+        }
+
+        function changeSlide(dir) {
+            currentIdx = (currentIdx + dir + slides.length) % slides.length;
+            updateUI();
+        }
+
+        // Debounced mouse move for tilt effect
+        let tiltRAF = null;
+        document.addEventListener('mousemove', (e) => {
+            if (tiltRAF) return;
+            tiltRAF = requestAnimationFrame(() => {
+                const x = (window.innerWidth / 2 - e.pageX) / 100;
+                const y = (window.innerHeight / 2 - e.pageY) / 100;
+                const activeSlide = document.querySelector('.slide.active');
+                if (activeSlide) {
+                    const blocks = activeSlide.querySelectorAll('.block, .poster-frame');
+                    blocks.forEach((b, i) => {
+                        const depth = (i % 3) + 1;
+                        b.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0) rotate(${x * 0.1}deg)`;
+                    });
+                }
+                tiltRAF = null;
+            });
+        });
+
+        // Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toTimeString().split(' ')[0];
+        }, 1000);
+
+        // Keyboard
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        // Initialize
+        updateUI();
+
+        // Make profile blocks clickable while preserving inner links (badges)
+        (function bindProfileCardLinks(){
+            const cardSelector = '.block[data-href]';
+            document.querySelectorAll(cardSelector).forEach(card => {
+                card.classList.add('clickable');
+                card.addEventListener('click', (ev) => {
+                    if (ev.target.closest('a')) return;
+                    const url = card.getAttribute('data-href');
+                    if (!url) return;
+                    window.open(url, '_blank');
+                });
+            });
+        })();
+
+        // ===== SLIDESHOW GALLERY =====
+        (function(){
+            const gallery = document.getElementById('media-gallery');
+            const thumbStrip = document.getElementById('thumb-strip');
+            const stripInfo = document.getElementById('strip-info');
+            const stripPrev = document.getElementById('strip-prev');
+            const stripNext = document.getElementById('strip-next');
+            if (!gallery) return;
+
+            // All media files - optimized with compressed webp
+            const mediaFiles = [
+                // Team photos
+                { type: 'image', src: 'photos/dita-compressed.webp' },
+                { type: 'image', src: 'photos/isa-compressed.webp' },
+                { type: 'image', src: 'photos/levi-compressed.webp' },
+                { type: 'image', src: 'photos/tups-compressed.webp' },
+                { type: 'image', src: 'photos/wallk-compressed.webp' },
+                // Event photos
+                { type: 'image', src: 'photos/IMG_20251113_194613-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251113_232511-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251113_233918890_MFNR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_000613433_MFNR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_000616513_MFNR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_013212-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125436926_HDR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125448554_HDR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125605-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125611-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125617-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125619-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125630-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125639-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125659_781_HDR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_125907197_HDR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_130611331_HDR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_130719833_HDR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_131008-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_134101595_HDR-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_135842-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_135917-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_142828-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_142927-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_142934-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_171851_340_PORTRAIT-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_202847_4-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_20251114_202848_7-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8267-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8281(1)-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8282-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8284(1)-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8368-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8422-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8423-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8433-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8445-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8453-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8455-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8458-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8464-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8465-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8466-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8467-compressed.webp' },
+                { type: 'image', src: 'photos/IMG_8503-compressed.webp' },
+                // Video screenshots
+                { type: 'image', src: 'photos/vlcsnap-2025-11-16-02h26m12s650.png' },
+                { type: 'image', src: 'photos/vlcsnap-2025-11-16-02h28m05s774.png' },
+                { type: 'image', src: 'photos/vlcsnap-2025-11-16-02h29m54s537.png' },
+                // Videos
+                { type: 'video', src: 'photos/VID_20251113_215041.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_215949.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_220455.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_220612.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_221327.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_222513.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_223801.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_232301.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_232521.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_235200.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_235408.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_204602766(1).mp4' },
+                { type: 'video', src: 'photos/VID_20251113_221407345.mp4' },
+                { type: 'video', src: 'photos/VID_20251113_231145899.mp4' },
+                { type: 'video', src: 'photos/VID_20251114_123744.mp4' },
+                { type: 'video', src: 'photos/VID_20251114_125420.mp4' },
+                { type: 'video', src: 'photos/VID_20251114_131017.mp4' },
+                { type: 'video', src: 'photos/VID_20251114_142834.mp4' },
+                { type: 'video', src: 'photos/VID_20251114_125628918(1).mp4' },
+                { type: 'video', src: 'photos/VID_20251114_171716432.mp4' },
+                { type: 'video', src: 'photos/VID-20251113-WA0047.mp4' },
+                { type: 'video', src: 'photos/IMG_8214.MOV' },
+                { type: 'video', src: 'photos/IMG_8215.MOV' },
+                { type: 'video', src: 'photos/IMG_8246.MOV' },
+                { type: 'video', src: 'photos/IMG_8252.MOV' },
+                { type: 'video', src: 'photos/IMG_8259.MOV' },
+                { type: 'video', src: 'photos/IMG_8265.MOV' },
+                { type: 'video', src: 'photos/IMG_8268.MOV' },
+                { type: 'video', src: 'photos/IMG_8270.MOV' },
+                { type: 'video', src: 'photos/IMG_8272.MOV' },
+                { type: 'video', src: 'photos/IMG_8274.MOV' },
+                { type: 'video', src: 'photos/IMG_8280.MOV' },
+                { type: 'video', src: 'photos/IMG_8287.MOV' },
+                { type: 'video', src: 'photos/IMG_8323.MOV' },
+                { type: 'video', src: 'photos/IMG_8325.MOV' },
+                { type: 'video', src: 'photos/IMG_8330.MOV' },
+                { type: 'video', src: 'photos/IMG_8331.MOV' },
+                { type: 'video', src: 'photos/IMG_8340.MOV' },
+                { type: 'video', src: 'photos/IMG_8342.MOV' },
+                { type: 'video', src: 'photos/IMG_8384.MOV' },
+                { type: 'video', src: 'photos/IMG_8428.MOV' },
+                { type: 'video', src: 'photos/IMG_8428(1).MOV' },
+                { type: 'video', src: 'photos/IMG_8434(1).MOV' },
+                { type: 'video', src: 'photos/IMG_8488.mov' }
+            ];
+
+            // Update strip info
+            stripInfo.textContent = `${mediaFiles.length} items`;
+
+            // Helper function to get thumbnail for videos
+            function getVideoThumbnail(videoSrc) {
+                const baseName = videoSrc.replace(/\.(mp4|MOV|mov)$/i, '');
+                return `${baseName}.png`;
+            }
+
+            // Fallback SVG for videos without thumbnails
+            const videoFallback = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%231a1a1a" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" fill="%23d1ff00" font-size="24"%3E▶%3C/text%3E%3C/svg%3E';
+
+            // Lazy loading with Intersection Observer
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '50px',
+                threshold: 0.1
+            });
+
+            // Build gallery with lazy loading and accessibility
+            const fragment = document.createDocumentFragment();
+            mediaFiles.forEach((m, idx) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.dataset.type = m.type;
+                item.dataset.src = m.src;
+                item.dataset.index = idx;
+                item.setAttribute('role', 'button');
+                item.setAttribute('tabindex', '0');
+                item.setAttribute('aria-label', `${m.type === 'video' ? 'Video' : 'Image'} ${idx + 1} of ${mediaFiles.length}`);
+
+                const img = document.createElement('img');
+                img.className = 'thumb lazy';
+                img.dataset.src = m.type === 'image' ? m.src : getVideoThumbnail(m.src);
+                img.alt = m.type === 'video' ? `Video thumbnail ${idx + 1}` : `Image ${idx + 1}`;
+                img.loading = 'lazy';
+                img.onerror = function() {
+                    if (m.type === 'video') {
+                        this.src = videoFallback;
+                    }
+                };
+                item.appendChild(img);
+
+                if (m.type === 'video'){
+                    const play = document.createElement('div');
+                    play.className = 'play-overlay';
+                    play.innerHTML = '▶';
+                    play.setAttribute('aria-hidden', 'true');
+                    item.appendChild(play);
+
+                    const badge = document.createElement('div');
+                    badge.className = 'video-badge';
+                    badge.textContent = 'VIDEO';
+                    badge.setAttribute('aria-hidden', 'true');
+                    item.appendChild(badge);
+                }
+
+                const openHandler = (e) => { 
+                    if (e.target.closest('a')) return; 
+                    openGalleryItem(idx); 
+                };
+                
+                item.addEventListener('click', openHandler);
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openHandler(e);
+                    }
+                });
+                
+                fragment.appendChild(item);
+
+                // Observe for lazy loading
+                imageObserver.observe(img);
+            });
+            gallery.appendChild(fragment);
+
+            // Build thumbnail strip (only first 20 for performance, rest loaded on scroll)
+            const thumbFragment = document.createDocumentFragment();
+            const initialThumbCount = Math.min(20, mediaFiles.length);
+            
+            for (let i = 0; i < initialThumbCount; i++) {
+                const m = mediaFiles[i];
+                const icon = document.createElement('div');
+                icon.className = 'icon';
+                icon.dataset.index = i;
+                const iconImg = document.createElement('img');
+                iconImg.src = m.type === 'image' ? m.src : getVideoThumbnail(m.src);
+                iconImg.alt = '';
+                iconImg.loading = 'lazy';
+                iconImg.onerror = function() {
+                    if (m.type === 'video') {
+                        this.src = videoFallback;
+                    }
+                };
+                icon.appendChild(iconImg);
+
+                if (m.type === 'video') {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'video-indicator';
+                    indicator.innerHTML = '▶';
+                    icon.appendChild(indicator);
+                }
+
+                icon.addEventListener('click', () => openGalleryItem(i));
+                thumbFragment.appendChild(icon);
+            }
+            thumbStrip.appendChild(thumbFragment);
+
+            // Lazy load more thumbnails on scroll
+            let loadedThumbCount = initialThumbCount;
+            const thumbObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && loadedThumbCount < mediaFiles.length) {
+                        const m = mediaFiles[loadedThumbCount];
+                        const icon = document.createElement('div');
+                        icon.className = 'icon';
+                        icon.dataset.index = loadedThumbCount;
+                        const iconImg = document.createElement('img');
+                        iconImg.src = m.type === 'image' ? m.src : getVideoThumbnail(m.src);
+                        iconImg.alt = '';
+                        iconImg.loading = 'lazy';
+                        iconImg.onerror = function() {
+                            if (m.type === 'video') {
+                                this.src = videoFallback;
+                            }
+                        };
+                        icon.appendChild(iconImg);
+
+                        if (m.type === 'video') {
+                            const indicator = document.createElement('div');
+                            indicator.className = 'video-indicator';
+                            indicator.innerHTML = '▶';
+                            icon.appendChild(indicator);
+                        }
+
+                        icon.addEventListener('click', () => openGalleryItem(loadedThumbCount));
+                        thumbStrip.appendChild(icon);
+                        loadedThumbCount++;
+                    }
+                });
+            }, { root: thumbStrip, rootMargin: '100px', threshold: 0.1 });
+
+            // Add sentinel for lazy loading
+            const sentinel = document.createElement('div');
+            sentinel.style.width = '1px';
+            sentinel.style.height = '1px';
+            thumbStrip.appendChild(sentinel);
+            thumbObserver.observe(sentinel);
+
+            // Debounced scroll handlers
+            let scrollTimeout;
+            stripPrev.addEventListener('click', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    thumbStrip.scrollBy({ left: -200, behavior: 'smooth' });
+                }, 16);
+            });
+
+            stripNext.addEventListener('click', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    thumbStrip.scrollBy({ left: 200, behavior: 'smooth' });
+                }, 16);
+            });
+
+            // Modal with navigation
+            let currentModalIdx = -1;
+            let modalEl = null;
+            let currentVideo = null;
+
+            function openGalleryItem(idx){
+                currentModalIdx = idx;
+                const m = mediaFiles[idx];
+                if (!m) return;
+
+                closeModal();
+
+                modalEl = document.createElement('div');
+                modalEl.className = 'gallery-modal';
+
+                const panel = document.createElement('div');
+                panel.className = 'modal-panel';
+
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'modal-close';
+                closeBtn.innerHTML = '✕';
+                closeBtn.setAttribute('aria-label', 'Close modal');
+                closeBtn.addEventListener('click', closeModal);
+                modalEl.appendChild(closeBtn);
+
+                const mediaContainer = document.createElement('div');
+                mediaContainer.className = 'modal-media-container';
+                mediaContainer.setAttribute('role', 'img');
+                mediaContainer.setAttribute('aria-label', `${m.type} ${idx + 1} of ${mediaFiles.length}`);
+                panel.appendChild(mediaContainer);
+
+                renderMedia(mediaContainer, m);
+
+                const controls = document.createElement('div');
+                controls.className = 'modal-controls';
+                controls.setAttribute('role', 'toolbar');
+                controls.setAttribute('aria-label', 'Media controls');
+
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'modal-btn';
+                prevBtn.innerHTML = '◀ PREV';
+                prevBtn.setAttribute('aria-label', 'Previous media');
+                prevBtn.addEventListener('click', () => changeIndex(-1));
+
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'modal-btn';
+                nextBtn.innerHTML = 'NEXT ▶';
+                nextBtn.setAttribute('aria-label', 'Next media');
+                nextBtn.addEventListener('click', () => changeIndex(1));
+
+                const fullscreenBtn = document.createElement('button');
+                fullscreenBtn.className = 'modal-btn fullscreen-btn';
+                fullscreenBtn.innerHTML = '⛶ FULLSCREEN';
+                fullscreenBtn.setAttribute('aria-label', 'Toggle fullscreen');
+                fullscreenBtn.addEventListener('click', () => toggleFullscreen());
+
+                controls.appendChild(prevBtn);
+                controls.appendChild(nextBtn);
+                controls.appendChild(fullscreenBtn);
+                panel.appendChild(controls);
+
+                const info = document.createElement('div');
+                info.className = 'modal-info';
+                info.innerHTML = `<span class="modal-counter">${idx + 1} / ${mediaFiles.length}</span> • ${m.type.toUpperCase()}`;
+                panel.appendChild(info);
+
+                // Thumbnail row in modal (lazy loaded)
+                const modalThumbRow = document.createElement('div');
+                modalThumbRow.className = 'modal-thumb-strip';
+                
+                // Only render visible thumbnails + buffer
+                const visibleRange = 10;
+                const startIdx = Math.max(0, idx - visibleRange);
+                const endIdx = Math.min(mediaFiles.length, idx + visibleRange + 1);
+                
+                for (let i = startIdx; i < endIdx; i++) {
+                    const mm = mediaFiles[i];
+                    const t = document.createElement('div');
+                    t.className = 'modal-thumb' + (i === idx ? ' active' : '');
+                    const ti = document.createElement('img');
+                    ti.src = mm.type === 'image' ? mm.src : getVideoThumbnail(mm.src);
+                    ti.alt = '';
+                    ti.loading = 'lazy';
+                    ti.onerror = function() {
+                        if (mm.type === 'video') {
+                            this.src = videoFallback;
+                        }
+                    };
+                    t.appendChild(ti);
+
+                    if (mm.type === 'video') {
+                        const dot = document.createElement('div');
+                        dot.className = 'video-dot';
+                        t.appendChild(dot);
+                    }
+
+                    t.addEventListener('click', () => { changeIndex(i - currentModalIdx); });
+                    modalThumbRow.appendChild(t);
+                }
+                panel.appendChild(modalThumbRow);
+
+                modalEl.appendChild(panel);
+                document.body.appendChild(modalEl);
+
+                modalEl.addEventListener('click', (ev) => { if (ev.target === modalEl) closeModal(); });
+                document.addEventListener('keydown', keyNav);
+                
+                // Touch gesture support
+                let touchStartX = 0;
+                let touchEndX = 0;
+                const minSwipeDistance = 50;
+                
+                panel.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+                
+                panel.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const swipeDistance = touchStartX - touchEndX;
+                    
+                    if (Math.abs(swipeDistance) > minSwipeDistance) {
+                        if (swipeDistance > 0) {
+                            changeIndex(1); // Swipe left = next
+                        } else {
+                            changeIndex(-1); // Swipe right = prev
+                        }
+                    }
+                }, { passive: true });
+                
+                // Focus trap
+                closeBtn.focus();
+            }
+
+            function renderMedia(container, m){
+                container.innerHTML = '';
+                currentVideo = null;
+
+                if (m.type === 'video'){
+                    const video = document.createElement('video');
+                    video.className = 'modal-media video';
+                    video.src = m.src;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.playsInline = true;
+                    video.loop = true;
+                    video.style.maxHeight = '70vh';
+                    video.style.maxWidth = '100%';
+                    video.preload = 'metadata';
+                    video.addEventListener('dblclick', () => toggleFullscreen());
+                    container.appendChild(video);
+                    currentVideo = video;
+                    video.addEventListener('loadedmetadata', () => { 
+                        const p = video.play(); 
+                        if (p && p.catch) p.catch(()=>{}); 
+                    });
+                } else {
+                    const img = document.createElement('img');
+                    img.className = 'modal-media';
+                    img.src = m.src;
+                    img.loading = 'eager';
+                    img.style.maxHeight = '70vh';
+                    img.style.maxWidth = '100%';
+                    img.addEventListener('dblclick', () => toggleFullscreen());
+                    container.appendChild(img);
+                }
+            }
+
+            function changeIndex(delta){
+                currentModalIdx = (currentModalIdx + delta + mediaFiles.length) % mediaFiles.length;
+                const m = mediaFiles[currentModalIdx];
+                const mediaContainer = modalEl.querySelector('.modal-media-container');
+                renderMedia(mediaContainer, m);
+
+                const info = modalEl.querySelector('.modal-info');
+                info.innerHTML = `<span class="modal-counter">${currentModalIdx + 1} / ${mediaFiles.length}</span> • ${m.type.toUpperCase()}`;
+
+                // Update thumbnails (re-render visible range)
+                const modalThumbRow = modalEl.querySelector('.modal-thumb-strip');
+                modalThumbRow.innerHTML = '';
+                
+                const visibleRange = 10;
+                const startIdx = Math.max(0, currentModalIdx - visibleRange);
+                const endIdx = Math.min(mediaFiles.length, currentModalIdx + visibleRange + 1);
+                
+                for (let i = startIdx; i < endIdx; i++) {
+                    const mm = mediaFiles[i];
+                    const t = document.createElement('div');
+                    t.className = 'modal-thumb' + (i === currentModalIdx ? ' active' : '');
+                    const ti = document.createElement('img');
+                    ti.src = mm.type === 'image' ? mm.src : getVideoThumbnail(mm.src);
+                    ti.alt = '';
+                    ti.loading = 'lazy';
+                    ti.onerror = function() {
+                        if (mm.type === 'video') {
+                            this.src = videoFallback;
+                        }
+                    };
+                    t.appendChild(ti);
+
+                    if (mm.type === 'video') {
+                        const dot = document.createElement('div');
+                        dot.className = 'video-dot';
+                        t.appendChild(dot);
+                    }
+
+                    t.addEventListener('click', () => { changeIndex(i - currentModalIdx); });
+                    modalThumbRow.appendChild(t);
+                }
+
+                // Scroll active thumbnail into view
+                const activeThumb = modalThumbRow.querySelector('.modal-thumb.active');
+                if (activeThumb) {
+                    activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            }
+
+            function closeModal(){
+                if (!modalEl) return;
+                if (currentVideo) { 
+                    try{ 
+                        currentVideo.pause(); 
+                        currentVideo.src = '';
+                        currentVideo.load();
+                    }catch(e){} 
+                }
+                document.removeEventListener('keydown', keyNav);
+                modalEl.remove(); 
+                modalEl = null;
+                currentVideo = null;
+            }
+
+            function keyNav(e){
+                if (!modalEl) return;
+                if (e.key === 'Escape') return closeModal();
+                if (e.key === 'ArrowRight') return changeIndex(1);
+                if (e.key === 'ArrowLeft') return changeIndex(-1);
+                if (e.key === 'f' || e.key === 'F') return toggleFullscreen();
+            }
+
+            function toggleFullscreen(){
+                if (!modalEl) return;
+                const mediaEl = modalEl.querySelector('.modal-media');
+                if (!mediaEl) return;
+
+                const toRequest = mediaEl.requestFullscreen || mediaEl.webkitRequestFullscreen || mediaEl.msRequestFullscreen;
+                const toExit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+                
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    if (toExit) toExit.call(document);
+                } else {
+                    if (toRequest) toRequest.call(mediaEl);
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

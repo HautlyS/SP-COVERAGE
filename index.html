@@ -333,207 +333,120 @@
             flex-shrink: 0;
         }
 
-        /* ===== HIGH PERFORMANCE LIGHTBOX / MODAL ===== */
-        .gallery-modal {
+        /* ===== THEATER MODE MODAL ===== */
+        .theater-modal {
             position: fixed;
             inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.92);
+            background: rgba(0,0,0,0.97);
             z-index: 5000;
-            padding: 20px;
+            display: none;
             opacity: 0;
-            animation: fadeIn 0.2s ease forwards;
-            contain: strict;
+            animation: fadeIn 0.3s ease forwards;
         }
+
+        .theater-modal.active { display: flex; }
 
         @keyframes fadeIn {
             to { opacity: 1; }
         }
 
-        .gallery-modal .modal-panel {
-            max-width: 95%;
-            max-height: 95%;
-            width: min(1200px, 95%);
-            background: transparent;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
+        .theater-content {
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            contain: layout style;
+            padding: 60px 40px 40px;
         }
 
-        .modal-media-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-height: 75vh;
+        .theater-image {
             max-width: 100%;
-            contain: strict;
+            max-height: calc(100vh - 180px);
+            object-fit: contain;
+            border: 3px solid var(--lime);
+            box-shadow: 0 0 40px rgba(209,255,0,0.3);
         }
 
-        .modal-media {
-            max-width: 100%;
-            max-height: 75vh;
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            contain: strict;
+        .theater-caption {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: var(--lime);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-align: center;
         }
 
-        .modal-media.video {
-            border-radius: 8px;
-        }
-
-        /* Modal Controls */
-        .modal-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 14px;
-            width: 100%;
-            padding: 0 20px;
-            contain: layout style;
-        }
-
-        .modal-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            contain: layout style;
-        }
-
-        .modal-btn:hover {
-            background: var(--lime);
-            color: var(--obsidian);
-            border-color: var(--lime);
-        }
-
-        .modal-btn.fullscreen-btn {
-            background: rgba(209,255,0,0.2);
-            border-color: var(--lime);
-        }
-
-        .modal-btn.fullscreen-btn:hover {
-            background: var(--lime);
-        }
-
-        .modal-close {
+        .theater-close {
             position: absolute;
-            top: 14px;
-            right: 14px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.2);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid var(--lime);
+            color: var(--lime);
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
             cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            contain: layout style;
+            transition: all 0.2s;
         }
 
-        .modal-close:hover {
+        .theater-close:hover {
             background: var(--pink);
             border-color: var(--pink);
+            color: white;
             transform: rotate(90deg);
         }
 
-        /* Modal Thumbnail Strip */
-        .modal-thumb-strip {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding: 6px 0;
-            max-width: 100%;
-            scroll-behavior: smooth;
-            contain: strict;
-        }
-
-        .modal-thumb-strip::-webkit-scrollbar {
-            height: 4px;
-        }
-        .modal-thumb-strip::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.1);
-        }
-        .modal-thumb-strip::-webkit-scrollbar-thumb {
-            background: var(--lime);
-            border-radius: 2px;
-        }
-
-        .modal-thumb {
-            width: 52px;
-            height: 52px;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.2);
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: all 0.2s ease;
-            position: relative;
-            contain: layout style paint;
-        }
-
-        .modal-thumb:hover {
-            transform: scale(1.05);
-            border-color: var(--lime);
-        }
-
-        .modal-thumb.active {
-            border-color: var(--lime);
-            box-shadow: 0 0 0 2px rgba(209,255,0,0.4);
-        }
-
-        .modal-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: #1a1a1a;
-            contain: strict;
-        }
-
-        .modal-thumb .video-dot {
+        .theater-nav {
             position: absolute;
-            bottom: 3px;
-            right: 3px;
-            width: 10px;
-            height: 10px;
-            background: var(--pink);
-            border-radius: 50%;
-            contain: layout style;
-        }
-
-        /* Modal Info */
-        .modal-info {
-            text-align: center;
-            margin-top: 10px;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.8rem;
-            contain: layout style;
-        }
-
-        .modal-counter {
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.8);
+            border: 2px solid var(--lime);
             color: var(--lime);
-            font-weight: bold;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .theater-nav:hover {
+            background: var(--lime);
+            color: var(--obsidian);
+        }
+
+        .theater-nav.prev { left: 20px; }
+        .theater-nav.next { right: 20px; }
+
+        .theater-fullscreen {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid var(--lime);
+            color: var(--lime);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+        }
+
+        .theater-fullscreen:hover {
+            background: var(--lime);
+            color: var(--obsidian);
+        }
+
+        .theater-counter {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--lime);
+            font-size: 0.9rem;
+            font-weight: 700;
         }
 
         /* Nav & Progress */
@@ -593,7 +506,7 @@
 
         .number-large {
             font-family: 'Syne', sans-serif;
-            font-size: 6rem;
+            font-size: 3rem;
             line-height: 1;
             margin-top: -20px;
         }
@@ -1075,7 +988,7 @@
                     <div class="crew-tag">COP 30: INDIGENOUS ACTION - MASSIVE ATTACK 2025 - COLLABORATIVE COVERAGE</div>
                     <h1 class="title-xl">THE<br>ANSWER<br>IS US<span style="color:var(--pink)">.</span></h1>
                 </div>
-                <div class="poster-frame" style="grid-column: span 5; grid-row: span 12; background-image: url('photos/IMG_8464.jpg');">
+                <div class="poster-frame" style="grid-column: span 5; grid-row: span 12; background-image: url('photos/IMG_8326.HEIC');">
                     <div class="glitch-static"></div>
                 </div>
                 <div class="block block-dark" style="grid-column: span 4; grid-row: span 4;">
@@ -1174,20 +1087,20 @@
 
                         <div class="block block-pink" style="position: absolute; bottom: 85px; right: -20px; width: 300px;">
                             <h3 style="font-family: 'Archivo Black'">SOUTH AMERICA DOC</h3>
-                            <p style="font-size: 0.7rem">Documentary / YOUTH PRODUCTION - RESISTENCE</p>
+                            <p style="font-size: 0.7rem"> YOUTH PRODUCTION - RESISTENCE<br> AMERICA LATIN MUSEU - CLIMATE MARCH</p>
                         </div>
                     </div>
                 <div class="block block-dark" style="grid-column: span 4; grid-row: span 4;">
-                    <div class="crew-tag">MEDIA_SABOTAGE</div>
-                    <p>Capturing the truth of the 2025 São Paulo Uprising.</p>
+                    <div class="crew-tag">INTERNATIONAL_NETWORK_COMPASSION</div>
+                    <p>Capturing the truth of the 2025 São Paulo COP 30 action with Indigenous Leadership + MASSIVE ATTACK COLECTIVE Worldwide Famous support .</p>
                 </div>
                 <div class="block block-lime" style="grid-column: span 4; grid-row: span 8;">
-                    <div class="number-large">03</div>
-                    <p style="font-weight: bold">ARCHIVE_ACCESS_GRANTED</p>
+                    <div class="number-large">Footages and Resources</div>
+                    <p style="font-weight: bold">GALLERY OF FOOTAGES <br><br> NETWORK OF CONNECTIONS  </p>
                     <div style="margin-top: 20px; border-top: 2px solid black; padding-top: 10px; font-size: 0.8rem;">
-                        > 480 HOURS FOOTAGE<br>
-                        > 12 REGIONS<br>
-                        > 1 GOAL
+                        > MORE THAN 4.000 PEOPLE INDIRECTLY REACHED<br>
+                        > INTERNATIONAL NETWORK - PARTNERS - COP 30 BRAZIK ENVIRONMENT<br>
+                        > CLIMATE CRISE DIRECT ACTION - ODS ALIGNED - ARTISTIC AUDIOVISUAL FRONT
                     </div>
                 </div>
             </section>
