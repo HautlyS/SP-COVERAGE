@@ -1421,6 +1421,94 @@
 
             // Preload first 6 images
             images.slice(0, 6).forEach(src => preloadImage(src));
+
+            // ===== THEATER MODE =====
+            const captions = [
+                'PARQUE ÁGUA BRANCA', 'MUSEU DA AMÉRICA LATINA', 'MASSIVE ATTACK',
+                'PARQUE ÁGUA BRANCA', 'MUSEU DA AMÉRICA LATINA',
+                'PARQUE ÁGUA BRANCA', 'MASSIVE ATTACK', 'MUSEU DA AMÉRICA LATINA',
+                'PARQUE ÁGUA BRANCA', 'MASSIVE ATTACK', 'MUSEU DA AMÉRICA LATINA',
+                'PARQUE ÁGUA BRANCA', 'MASSIVE ATTACK', 'MUSEU DA AMÉRICA LATINA',
+                'PARQUE ÁGUA BRANCA', 'MASSIVE ATTACK', 'MUSEU DA AMÉRICA LATINA',
+                'MASSIVE ATTACK', 'MASSIVE ATTACK'
+            ];
+
+            let theaterIndex = 0;
+            const theaterModal = document.createElement('div');
+            theaterModal.className = 'theater-modal';
+            theaterModal.innerHTML = `
+                <div class="theater-content">
+                    <div class="theater-counter"></div>
+                    <button class="theater-close">×</button>
+                    <button class="theater-nav prev">‹</button>
+                    <button class="theater-nav next">›</button>
+                    <img class="theater-image" alt="">
+                    <div class="theater-caption"></div>
+                    <button class="theater-fullscreen">⛶ FULLSCREEN</button>
+                </div>
+            `;
+            document.body.appendChild(theaterModal);
+
+            const theaterImg = theaterModal.querySelector('.theater-image');
+            const theaterCaption = theaterModal.querySelector('.theater-caption');
+            const theaterCounter = theaterModal.querySelector('.theater-counter');
+            const theaterClose = theaterModal.querySelector('.theater-close');
+            const theaterPrev = theaterModal.querySelector('.prev');
+            const theaterNext = theaterModal.querySelector('.next');
+            const theaterFullscreen = theaterModal.querySelector('.theater-fullscreen');
+
+            function openTheater(index) {
+                theaterIndex = index;
+                updateTheater();
+                theaterModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeTheater() {
+                theaterModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function updateTheater() {
+                theaterImg.src = images[theaterIndex];
+                theaterCaption.textContent = captions[theaterIndex] || 'SÃO PAULO COVERAGE';
+                theaterCounter.textContent = `${theaterIndex + 1} / ${images.length}`;
+            }
+
+            function navTheater(dir) {
+                theaterIndex = (theaterIndex + dir + images.length) % images.length;
+                updateTheater();
+            }
+
+            theaterClose.onclick = closeTheater;
+            theaterPrev.onclick = () => navTheater(-1);
+            theaterNext.onclick = () => navTheater(1);
+            theaterFullscreen.onclick = () => {
+                if (!document.fullscreenElement) {
+                    theaterModal.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            };
+
+            theaterModal.onclick = (e) => {
+                if (e.target === theaterModal) closeTheater();
+            };
+
+            document.addEventListener('keydown', (e) => {
+                if (!theaterModal.classList.contains('active')) return;
+                if (e.key === 'Escape') closeTheater();
+                if (e.key === 'ArrowLeft') navTheater(-1);
+                if (e.key === 'ArrowRight') navTheater(1);
+            });
+
+            gallery.addEventListener('click', (e) => {
+                const item = e.target.closest('.gallery-item');
+                if (item) {
+                    const items = Array.from(gallery.querySelectorAll('.gallery-item'));
+                    openTheater(items.indexOf(item));
+                }
+            });
         })();
     </script>
 </body>
