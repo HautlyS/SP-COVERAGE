@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Earth Guardians South America - COP30 Climate Action Coverage. Indigenous Initiative + Massive Attack 2025. Youth-led environmental activism and documentation.">
+    <meta name="keywords" content="Earth Guardians, COP30, climate action, indigenous rights, environmental activism, South America">
+    <meta property="og:title" content="EARTH GUARDIANS | SP COVERAGE">
+    <meta property="og:description" content="Youth-led climate activism documentation from São Paulo. COP30 Indigenous Initiative + Massive Attack 2025.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <title>EARTH GUARDIANS | SP COVERAGE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +26,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        body, .block, .nav-trigger, .gallery-item, .modal-thumb, .thumb-strip .icon {
             cursor: crosshair;
+        }
+        
+        a, button {
+            cursor: pointer;
+        }
+        
+        *:focus-visible {
+            outline: 2px solid var(--lime);
+            outline-offset: 2px;
         }
 
         body {
@@ -185,197 +203,114 @@
             filter: grayscale(0) contrast(1.1);
         }
 
-        /* ===== HIGH PERFORMANCE MASONRY GALLERY ===== */
+        /* ===== GRID GALLERY ===== */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 8px;
-            padding: 8px;
-            height: calc(100% - 80px);
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 200px;
+            gap: 6px;
+            width: 100%;
+            height: calc(100% - 90px);
+            background: #000;
             overflow-y: auto;
             overflow-x: hidden;
-            position: relative;
-            contain: strict;
-            content-visibility: auto;
+            padding: 6px;
         }
 
-        /* Custom scrollbar */
-        .gallery::-webkit-scrollbar {
-            width: 6px;
-        }
-        .gallery::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.2);
-        }
-        .gallery::-webkit-scrollbar-thumb {
-            background: var(--lime);
-            border-radius: 3px;
-        }
+        .gallery::-webkit-scrollbar { width: 6px; }
+        .gallery::-webkit-scrollbar-track { background: #000; }
+        .gallery::-webkit-scrollbar-thumb { background: var(--lime); }
 
         .gallery-item {
-            cursor: pointer;
             position: relative;
             overflow: hidden;
-            border-radius: 6px;
-            background: rgba(0,0,0,0.04);
-            aspect-ratio: 1;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            contain: layout style paint;
-            will-change: transform;
+            background: #0a0a0a;
+            border: 2px solid transparent;
+            transition: border-color 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
         }
 
         .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border-color: var(--lime);
+            transform: scale(1.02);
             z-index: 10;
         }
 
-        .gallery-item img.thumb {
+        .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.05);
-            background: #1a1a1a;
-            contain: strict;
+            filter: contrast(1.2) saturate(1.1) brightness(0.95);
+            mix-blend-mode: normal;
         }
 
-        /* Lazy loading placeholder */
-        .gallery-item img.thumb.lazy {
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(209,255,0,0.05) 0%, rgba(255,0,85,0.05) 100%);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        .gallery-item img[data-src] {
             opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
-        .gallery-item img.thumb.loaded {
+        .gallery-item img.loaded {
             opacity: 1;
+            transition: opacity 0.3s;
         }
 
-        .gallery-item .play-overlay {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.7);
-            color: white;
-            font-size: 1.5rem;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            pointer-events: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            transition: transform 0.2s ease;
-            contain: layout style;
-        }
-
-        .gallery-item:hover .play-overlay {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
-        .gallery-item .video-badge {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            background: var(--pink);
-            color: white;
-            font-size: 0.55rem;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-weight: bold;
-            pointer-events: none;
-            contain: layout style;
-        }
-
-        /* ===== HIGH PERFORMANCE THUMBNAIL STRIP ===== */
+        /* ===== THUMBNAIL STRIP ===== */
         .thumb-strip-container {
             position: absolute;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
-            padding: 6px 10px;
+            background: rgba(0,0,0,0.95);
+            padding: 6px;
             border-top: 2px solid var(--lime);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             z-index: 100;
-            contain: layout style;
         }
 
         .thumb-strip {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             overflow-x: auto;
-            overflow-y: hidden;
             flex: 1;
-            padding: 4px 0;
             scroll-behavior: smooth;
-            contain: strict;
         }
 
-        .thumb-strip::-webkit-scrollbar {
-            height: 4px;
-        }
-        .thumb-strip::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.1);
-        }
-        .thumb-strip::-webkit-scrollbar-thumb {
-            background: var(--lime);
-            border-radius: 2px;
-        }
+        .thumb-strip::-webkit-scrollbar { height: 3px; }
+        .thumb-strip::-webkit-scrollbar-thumb { background: var(--lime); }
 
         .thumb-strip .icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.2);
             cursor: pointer;
             flex-shrink: 0;
-            transition: all 0.2s ease;
-            position: relative;
-            contain: layout style paint;
-            will-change: transform, border-color;
+            transition: border-color 0.2s;
+            overflow: hidden;
         }
 
-        .thumb-strip .icon:hover {
-            transform: scale(1.1);
-            border-color: var(--lime);
-            box-shadow: 0 6px 16px rgba(209,255,0,0.3);
-        }
-
-        .thumb-strip .icon.active {
-            border-color: var(--lime);
-            box-shadow: 0 0 0 2px rgba(209,255,0,0.3);
-        }
+        .thumb-strip .icon:hover { border-color: var(--pink); }
+        .thumb-strip .icon.active { border-color: var(--lime); }
 
         .thumb-strip .icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            background: #1a1a1a;
-            contain: strict;
-        }
-
-        .thumb-strip .icon .video-indicator {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            background: var(--pink);
-            color: white;
-            font-size: 0.45rem;
-            width: 14px;
-            height: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            contain: layout style;
         }
 
         .strip-nav-btn {
@@ -384,30 +319,18 @@
             color: var(--obsidian);
             width: 28px;
             height: 28px;
-            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
             flex-shrink: 0;
-            contain: layout style;
         }
 
-        .strip-nav-btn:hover {
-            background: var(--pink);
-            color: white;
-            transform: scale(1.1);
-        }
+        .strip-nav-btn:hover { background: var(--pink); color: white; }
 
         .strip-info {
             font-size: 0.6rem;
-            color: rgba(255,255,255,0.7);
-            white-space: nowrap;
+            color: var(--lime);
+            font-weight: 700;
             flex-shrink: 0;
-            contain: layout style;
         }
 
         /* ===== HIGH PERFORMANCE LIGHTBOX / MODAL ===== */
@@ -769,8 +692,7 @@
             border: 2px solid var(--lime);
             position: relative;
             overflow: hidden;
-            z-index: 99999;
-            
+            z-index: 10;
         }
 
         .demands-header::before {
@@ -794,7 +716,7 @@
             color: var(--lime);
             text-shadow: 4px 4px 0px var(--pink), 0 0 20px rgba(0,0,0,0.8);
             position: relative;
-            z-index: 10000 !important;
+            z-index: 2;
             margin: 0;
         }
 
@@ -804,7 +726,7 @@
             text-shadow: 0 0 10px rgba(0,0,0,0.9);
             margin-top: 10px;
             position: relative;
-            z-index: 10000 !important;
+            z-index: 2;
         }
 
         /* Demand Cards */
@@ -849,11 +771,6 @@
         .demand-card.demand-5::before { background: #9b59b6; }
         .demand-card.demand-5 { border-left: 3px solid #9b59b6; }
         .demand-card.demand-6::before { background: #2ecc71; }
-        .demand-card.demand-6 { border-left: 3px solid #2ecc71; }
-        
-        /* Demand 2, 4, 6 with different border colors */
-        .demand-card.demand-2 { border-left: 3px solid #00d4ff; }
-        .demand-card.demand-4 { border-left: 3px solid #ff9500; }
         .demand-card.demand-6 { border-left: 3px solid #2ecc71; }
 
         .demand-icon {
@@ -962,7 +879,12 @@
 
         /* Modal / Details */
         .demand-modal {
-            position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 3000;
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9000;
             background: rgba(0,0,0,0.6);
             padding: 40px;
         }
@@ -988,7 +910,7 @@
             grid-row: span 5;
             background: linear-gradient(180deg, var(--obsidian) 0%, #1a1a1a 100%);
             color: var(--paper);
-            top-padding: 30px;
+            padding-top: 30px;
             display: flex;
             gap: 30px;
             border: 2px solid var(--paper);
@@ -1074,20 +996,17 @@
             .demand-card { grid-column: span 6; }
             .cta-section { flex-direction: column; }
             .cta-content, .cta-actions { flex: none; width: 100%; }
-            .gallery { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
             .thumb-strip .icon { width: 40px; height: 40px; }
         }
 
         @media (max-width: 600px) {
-            .gallery { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 4px; padding: 4px; }
-            .gallery-item { border-radius: 4px; }
             .thumb-strip .icon { width: 36px; height: 36px; }
             .modal-thumb { width: 44px; height: 44px; }
         }
 
         /* Loading skeleton */
         .skeleton {
-            background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+            background: linear-gradient(90deg, #1a1a1a 25%, #2a2a1a 50%, #1a1a1a 75%);
             background-size: 200% 100%;
             animation: skeleton-loading 1.5s ease-in-out infinite;
         }
@@ -1096,12 +1015,45 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+        
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* Skip to content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--lime);
+            color: var(--obsidian);
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 10000;
+            transition: top 0.2s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
     </style>
 </head>
 <body>
 
-    <div class="texture-overlay"></div>
-    <div class="paper-grain"></div>
+    <a href="#presentation-root" class="skip-link">Skip to main content</a>
+
+    <div class="texture-overlay" aria-hidden="true"></div>
+    <div class="paper-grain" aria-hidden="true"></div>
 
     <div class="app-container">
         <header>
@@ -1116,14 +1068,14 @@
             </div>
         </header>
 
-        <main id="presentation-root">
+        <main id="presentation-root" role="main" aria-label="Climate action presentation">
             <!-- SLIDE 1: MANIFESTO -->
-            <section class="slide active">
+            <section class="slide active" aria-label="Slide 1: Manifesto">
                 <div class="block block-lime" style="grid-column: span 7; grid-row: span 8;">
                     <div class="crew-tag">COP 30: INDIGENOUS ACTION - MASSIVE ATTACK 2025 - COLLABORATIVE COVERAGE</div>
                     <h1 class="title-xl">THE<br>ANSWER<br>IS US<span style="color:var(--pink)">.</span></h1>
                 </div>
-                <div class="poster-frame" style="grid-column: span 5; grid-row: span 12; background-image: url('photos/IMG_20251114_135842.jpg');">
+                <div class="poster-frame" style="grid-column: span 5; grid-row: span 12; background-image: url('photos/IMG_8464.jpg');">
                     <div class="glitch-static"></div>
                 </div>
                 <div class="block block-dark" style="grid-column: span 4; grid-row: span 4;">
@@ -1135,7 +1087,7 @@
             </section>
 
             <!-- SLIDE 2: COALITION WITH PROFILE PHOTOS & BADGES -->
-            <section class="slide">
+            <section class="slide" aria-label="Slide 2: Team members">
                 <div class="block block-lime" style="grid-column: span 12; grid-row: span 2;">
                     <h2 class="title-xl" style="font-size: 3rem; letter-spacing: -2px; text-align: center;">EARTH GUARDIANS SOUTH AMERICA TEAM</h2>
                 </div>
@@ -1147,8 +1099,8 @@
                     <div class="profile-photo-container">
                         <img src="photos/wallk.webp" alt="Wallace" class="profile-photo">
                     </div>
-                    <a href="badge-wallace.png" class="badge-link" target="_blank" title="View Badge">
-                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    <a href="badge-wallace.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Wallace's badge">
+                        <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW MEMBER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">WALLACE</h3>
@@ -1162,8 +1114,8 @@
                     <div class="profile-photo-container">
                         <img src="photos/tups.jpg" alt="Tupã" class="profile-photo">
                     </div>
-                    <a href="badge-tupa.png" class="badge-link" target="_blank" title="View Badge">
-                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    <a href="badge-tupa.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Tupã's badge">
+                        <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">RCC SOUTH AMERICA</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">TUPÃ LEVI</h3>
@@ -1175,8 +1127,8 @@
                     <div class="profile-photo-container">
                         <img src="photos/levi.webp" alt="Levi Moisés" class="profile-photo">
                     </div>
-                    <a href="badge.png" class="badge-link" target="_blank" title="View Badge">
-                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    <a href="badge.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Levi's badge">
+                        <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW WISDOM ADVISER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">LEVI KARMADRUM</h3>
@@ -1187,8 +1139,8 @@
                     <div class="profile-photo-container">
                         <img src="photos/isa.jpg" alt="Isadora" class="profile-photo">
                     </div>
-                    <a href="badge-isadora.png" class="badge-link" target="_blank" title="View Badge">
-                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    <a href="badge-isadora.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Isadora's badge">
+                        <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW LEADER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">ISADORA</h3>
@@ -1200,8 +1152,8 @@
                     <div class="profile-photo-container">
                         <img src="photos/dita.webp" alt="Nanci" class="profile-photo">
                     </div>
-                    <a href="badge-nanci.png" class="badge-link" target="_blank" title="View Badge">
-                        <img src="badge.png" alt="Badge" class="badge-icon">
+                    <a href="badge-nanci.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Nanci's badge">
+                        <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW WISDOM ADVISER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">NANCI FERREIRA</h3>
@@ -1210,14 +1162,14 @@
             </section>
 
             <!-- SLIDE 3: MEDIA GALLERY -->
-            <section class="slide">
+            <section class="slide" aria-label="Slide 3: Media gallery">
                     <div class="poster-frame" style="grid-column: span 8; grid-row: span 12;">
-                        <div class="gallery" id="media-gallery"></div>
+                        <div class="gallery" id="media-gallery" role="list" aria-label="Photo gallery"></div>
                         <div class="thumb-strip-container">
-                            <button class="strip-nav-btn" id="strip-prev">◀</button>
-                            <div class="thumb-strip" id="thumb-strip"></div>
-                            <button class="strip-nav-btn" id="strip-next">▶</button>
-                            <span class="strip-info" id="strip-info">0 / 0</span>
+                            <button class="strip-nav-btn" id="strip-prev" aria-label="Scroll thumbnails left">◀</button>
+                            <div class="thumb-strip" id="thumb-strip" role="list" aria-label="Image thumbnails"></div>
+                            <button class="strip-nav-btn" id="strip-next" aria-label="Scroll thumbnails right">▶</button>
+                            <span class="strip-info" id="strip-info" aria-live="polite">0 / 0</span>
                         </div>
 
                         <div class="block block-pink" style="position: absolute; bottom: 85px; right: -20px; width: 300px;">
@@ -1241,15 +1193,67 @@
             </section>
 
             <!-- SLIDE 4: ENHANCED DEMANDS -->
+            <section class="slide" aria-label="Slide 4: Our demands">
+                <div class="demands-header">
+                    <h2>OUR DEMANDS</h2>
+                    <p class="subtitle">Climate Justice Now - Youth-Led Action for COP30</p>
+                </div>
+                
+                <div class="demand-card demand-1">
+                    <span class="demand-number">01</span>
+                    <span class="demand-icon">🌍</span>
+                    <h3>Indigenous Land Rights</h3>
+                    <p>Immediate recognition and protection of indigenous territories. Stop deforestation and land grabbing. Respect ancestral knowledge and sovereignty.</p>
+                </div>
+                
+                <div class="demand-card demand-2">
+                    <span class="demand-number">02</span>
+                    <span class="demand-icon">💧</span>
+                    <h3>Water Protection</h3>
+                    <p>Clean water access for all communities. End corporate pollution of rivers and aquifers. Protect water sources from extractive industries.</p>
+                </div>
+                
+                <div class="demand-card demand-3">
+                    <span class="demand-number">03</span>
+                    <span class="demand-icon">⚡</span>
+                    <h3>Renewable Energy Transition</h3>
+                    <p>100% renewable energy by 2030. End fossil fuel subsidies. Just transition for workers and communities. Community-owned energy systems.</p>
+                </div>
+                
+                <div class="demand-card demand-4">
+                    <span class="demand-number">04</span>
+                    <span class="demand-icon">🎓</span>
+                    <h3>Climate Education</h3>
+                    <p>Mandatory climate education in all schools. Youth participation in climate policy. Fund environmental literacy programs nationwide.</p>
+                </div>
+                
+                <div class="demand-card demand-5">
+                    <span class="demand-number">05</span>
+                    <span class="demand-icon">⚖️</span>
+                    <h3>Climate Justice</h3>
+                    <p>Hold polluters accountable. Reparations for climate damage. Support frontline communities. End environmental racism.</p>
+                </div>
+                
+                <div class="demand-card demand-6">
+                    <span class="demand-number">06</span>
+                    <span class="demand-icon">🤝</span>
+                    <h3>Youth Leadership</h3>
+                    <p>Youth representation in all climate negotiations. Fund youth-led initiatives. Amplify young voices in decision-making processes.</p>
+                </div>
+                
+                <div class="hashtag-banner">
+                    #CLIMATEJUSTICENOW #COP30 #EARTHGUARDIANS
+                </div>
+            </section>
             
         </main>
 
         <footer>
-            <button class="nav-trigger" onclick="changeSlide(-1)">[ BACK ]</button>
-            <div class="progress-bar">
+            <button class="nav-trigger" onclick="changeSlide(-1)" aria-label="Previous slide">[ BACK ]</button>
+            <div class="progress-bar" role="progressbar" aria-label="Presentation progress">
                 <div class="progress-fill" id="progress-bar"></div>
             </div>
-            <button class="nav-trigger" onclick="changeSlide(1)">[ NEXT ]</button>
+            <button class="nav-trigger" onclick="changeSlide(1)" aria-label="Next slide">[ NEXT ]</button>
         </footer>
     </div>
 
@@ -1266,12 +1270,24 @@
                 });
                 const progress = ((currentIdx + 1) / slides.length) * 100;
                 bar.style.width = `${progress}%`;
+                bar.parentElement.setAttribute('aria-valuenow', Math.round(progress));
+                bar.parentElement.setAttribute('aria-valuemin', '0');
+                bar.parentElement.setAttribute('aria-valuemax', '100');
             });
         }
 
         function changeSlide(dir) {
             currentIdx = (currentIdx + dir + slides.length) % slides.length;
             updateUI();
+            
+            // Announce slide change for screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            announcement.textContent = `Slide ${currentIdx + 1} of ${slides.length}`;
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 1000);
         }
 
         // Debounced mouse move for tilt effect
@@ -1294,15 +1310,26 @@
         });
 
         // Clock
-        setInterval(() => {
+        function updateClock() {
             const now = new Date();
-            document.getElementById('clock').innerText = now.toTimeString().split(' ')[0];
-        }, 1000);
+            const clockEl = document.getElementById('clock');
+            if (clockEl) {
+                clockEl.innerText = now.toTimeString().split(' ')[0];
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        // Keyboard
+        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') changeSlide(1);
-            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                changeSlide(1);
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
         });
 
         // Initialize
@@ -1313,17 +1340,28 @@
             const cardSelector = '.block[data-href]';
             document.querySelectorAll(cardSelector).forEach(card => {
                 card.classList.add('clickable');
-                card.addEventListener('click', (ev) => {
+                card.setAttribute('role', 'link');
+                card.setAttribute('tabindex', '0');
+                
+                const handleActivation = (ev) => {
                     if (ev.target.closest('a')) return;
                     const url = card.getAttribute('data-href');
                     if (!url) return;
-                    window.open(url, '_blank');
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                };
+                
+                card.addEventListener('click', handleActivation);
+                card.addEventListener('keydown', (ev) => {
+                    if (ev.key === 'Enter' || ev.key === ' ') {
+                        ev.preventDefault();
+                        handleActivation(ev);
+                    }
                 });
             });
         })();
 
-        // ===== HIGH PERFORMANCE GALLERY with Lazy Loading =====
-        (function initMediaGallery(){
+        // ===== HIGH PERFORMANCE GRID GALLERY =====
+        (function(){
             const gallery = document.getElementById('media-gallery');
             const thumbStrip = document.getElementById('thumb-strip');
             const stripInfo = document.getElementById('strip-info');
@@ -1331,490 +1369,145 @@
             const stripNext = document.getElementById('strip-next');
             if (!gallery) return;
 
-            // All media files from photos/ directory
-            const mediaFiles = [
-                // Images
-                { type: 'image', src: 'photos/dita.webp' },
-                { type: 'image', src: 'photos/isa.jpg' },
-                { type: 'image', src: 'photos/levi.webp' },
-                { type: 'image', src: 'photos/tups.jpg' },
-                { type: 'image', src: 'photos/wallk.webp' },
-                { type: 'image', src: 'photos/IMG_8267.jpg' },
-                { type: 'image', src: 'photos/IMG_8368.jpg' },
-                { type: 'image', src: 'photos/IMG_8422.jpg' },
-                { type: 'image', src: 'photos/IMG_8423.jpg' },
-                { type: 'image', src: 'photos/IMG_8433.jpg' },
-                { type: 'image', src: 'photos/IMG_8453.JPG' },
-                { type: 'image', src: 'photos/IMG_8455.JPG' },
-                { type: 'image', src: 'photos/IMG_8458.JPG' },
-                { type: 'image', src: 'photos/IMG_8464.jpg' },
-                { type: 'image', src: 'photos/IMG_8465.jpg' },
-                { type: 'image', src: 'photos/IMG_8466.jpg' },
-                { type: 'image', src: 'photos/IMG_8467.jpg' },
-                { type: 'image', src: 'photos/IMG_8503.JPG' },
-                { type: 'image', src: 'photos/IMG_8281(1).JPG' },
-                { type: 'image', src: 'photos/IMG_8284(1).JPG' },
-                { type: 'image', src: 'photos/IMG_20251113_194613.jpg' },
-                { type: 'image', src: 'photos/IMG_20251113_232511.jpg' },
-                { type: 'image', src: 'photos/IMG_20251113_233918890_MFNR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_013212.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125605.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125611.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125617.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125619.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125630.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125659_781_HDR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_131008.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_135842.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_135917.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_142828.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_142927.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_142934.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_171851_340_PORTRAIT.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_202847_4.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_202848_7.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_000613433_MFNR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_000616513_MFNR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125436926_HDR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125448554_HDR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_125907197_HDR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_130611331_HDR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_130719833_HDR.jpg' },
-                { type: 'image', src: 'photos/IMG_20251114_134101595_HDR.jpg' },
-                { type: 'image', src: 'photos/IMG_8282.jpg' },
-                { type: 'image', src: 'photos/vlcsnap-2025-11-16-02h26m12s650.png' },
-                { type: 'image', src: 'photos/vlcsnap-2025-11-16-02h28m05s774.png' },
-                { type: 'image', src: 'photos/vlcsnap-2025-11-16-02h29m54s537.png' },
-                // Videos
-                { type: 'video', src: 'photos/VID_20251113_215041.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_215949.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_220455.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_220612.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_221327.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_222513.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_223801.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_232301.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_232521.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_235200.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_235408.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_204602766(1).mp4' },
-                { type: 'video', src: 'photos/VID_20251113_221407345.mp4' },
-                { type: 'video', src: 'photos/VID_20251113_231145899.mp4' },
-                { type: 'video', src: 'photos/VID_20251114_123744.mp4' },
-                { type: 'video', src: 'photos/VID_20251114_125420.mp4' },
-                { type: 'video', src: 'photos/VID_20251114_131017.mp4' },
-                { type: 'video', src: 'photos/VID_20251114_142834.mp4' },
-                { type: 'video', src: 'photos/VID_20251114_125628918(1).mp4' },
-                { type: 'video', src: 'photos/VID_20251114_171716432.mp4' },
-                { type: 'video', src: 'photos/VID-20251113-WA0047.mp4' },
-                { type: 'video', src: 'photos/IMG_8214.MOV' },
-                { type: 'video', src: 'photos/IMG_8215.MOV' },
-                { type: 'video', src: 'photos/IMG_8246.MOV' },
-                { type: 'video', src: 'photos/IMG_8252.MOV' },
-                { type: 'video', src: 'photos/IMG_8259.MOV' },
-                { type: 'video', src: 'photos/IMG_8265.MOV' },
-                { type: 'video', src: 'photos/IMG_8268.MOV' },
-                { type: 'video', src: 'photos/IMG_8270.MOV' },
-                { type: 'video', src: 'photos/IMG_8272.MOV' },
-                { type: 'video', src: 'photos/IMG_8274.MOV' },
-                { type: 'video', src: 'photos/IMG_8280.MOV' },
-                { type: 'video', src: 'photos/IMG_8287.MOV' },
-                { type: 'video', src: 'photos/IMG_8323.MOV' },
-                { type: 'video', src: 'photos/IMG_8325.MOV' },
-                { type: 'video', src: 'photos/IMG_8330.MOV' },
-                { type: 'video', src: 'photos/IMG_8331.MOV' },
-                { type: 'video', src: 'photos/IMG_8340.MOV' },
-                { type: 'video', src: 'photos/IMG_8342.MOV' },
-                { type: 'video', src: 'photos/IMG_8384.MOV' },
-                { type: 'video', src: 'photos/IMG_8428.MOV' },
-                { type: 'video', src: 'photos/IMG_8428(1).MOV' },
-                { type: 'video', src: 'photos/IMG_8434(1).MOV' },
-                { type: 'video', src: 'photos/IMG_8488.mov' }
+            const images = [
+                'photos/dita.webp','photos/isa.jpg','photos/levi.webp',
+                'photos/tups.jpg','photos/wallk.webp',
+                'photos/IMG_20251113_194613.jpg','photos/IMG_20251113_232511.jpg',
+                'photos/IMG_20251114_125617.jpg','photos/IMG_20251114_142934.jpg',
+                'photos/IMG_20251114_202847_4.jpg','photos/IMG_8267.jpg',
+                'photos/IMG_8422-compressed.jpg','photos/IMG_8445.JPG',
+                'photos/IMG_8458-compressed.jpg','photos/IMG_8464.jpg',
+                'photos/IMG_8503-compressed-compressed.png',
+                'photos/vlcsnap-2025-11-16-02h26m12s650.png',
+                'photos/vlcsnap-2025-11-16-02h29m54s537.png'
             ];
 
-            // Update strip info
-            stripInfo.textContent = `${mediaFiles.length} items`;
+            const cache = new Map();
+            let currentPage = 0;
+            const pageSize = 18;
+            let observer;
 
-            // Helper function to get thumbnail for videos
-            function getVideoThumbnail(videoSrc) {
-                const baseName = videoSrc.replace(/\.(mp4|MOV|mov)$/i, '');
-                return `${baseName}.png`;
-            }
-
-            // Fallback SVG for videos without thumbnails
-            const videoFallback = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%231a1a1a" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" fill="%23d1ff00" font-size="24"%3E▶%3C/text%3E%3C/svg%3E';
-
-            // Lazy loading with Intersection Observer
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.classList.remove('lazy');
-                            img.classList.add('loaded');
-                            observer.unobserve(img);
-                        }
-                    }
-                });
-            }, {
-                rootMargin: '50px',
-                threshold: 0.1
-            });
-
-            // Build gallery with lazy loading
-            const fragment = document.createDocumentFragment();
-            mediaFiles.forEach((m, idx) => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                item.dataset.type = m.type;
-                item.dataset.src = m.src;
-                item.dataset.index = idx;
-
-                const img = document.createElement('img');
-                img.className = 'thumb lazy';
-                img.dataset.src = m.type === 'image' ? m.src : getVideoThumbnail(m.src);
-                img.alt = '';
-                img.loading = 'lazy';
-                img.onerror = function() {
-                    if (m.type === 'video') {
-                        this.src = videoFallback;
-                    }
-                };
-                item.appendChild(img);
-
-                if (m.type === 'video'){
-                    const play = document.createElement('div');
-                    play.className = 'play-overlay';
-                    play.innerHTML = '▶';
-                    item.appendChild(play);
-
-                    const badge = document.createElement('div');
-                    badge.className = 'video-badge';
-                    badge.textContent = 'VIDEO';
-                    item.appendChild(badge);
-                }
-
-                item.addEventListener('click', (e) => { 
-                    if (e.target.closest('a')) return; 
-                    openGalleryItem(idx); 
-                });
-                fragment.appendChild(item);
-
-                // Observe for lazy loading
-                imageObserver.observe(img);
-            });
-            gallery.appendChild(fragment);
-
-            // Build thumbnail strip (only first 20 for performance, rest loaded on scroll)
-            const thumbFragment = document.createDocumentFragment();
-            const initialThumbCount = Math.min(20, mediaFiles.length);
-            
-            for (let i = 0; i < initialThumbCount; i++) {
-                const m = mediaFiles[i];
-                const icon = document.createElement('div');
-                icon.className = 'icon';
-                icon.dataset.index = i;
-                const iconImg = document.createElement('img');
-                iconImg.src = m.type === 'image' ? m.src : getVideoThumbnail(m.src);
-                iconImg.alt = '';
-                iconImg.loading = 'lazy';
-                iconImg.onerror = function() {
-                    if (m.type === 'video') {
-                        this.src = videoFallback;
-                    }
-                };
-                icon.appendChild(iconImg);
-
-                if (m.type === 'video') {
-                    const indicator = document.createElement('div');
-                    indicator.className = 'video-indicator';
-                    indicator.innerHTML = '▶';
-                    icon.appendChild(indicator);
-                }
-
-                icon.addEventListener('click', () => openGalleryItem(i));
-                thumbFragment.appendChild(icon);
-            }
-            thumbStrip.appendChild(thumbFragment);
-
-            // Lazy load more thumbnails on scroll
-            let loadedThumbCount = initialThumbCount;
-            const thumbObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && loadedThumbCount < mediaFiles.length) {
-                        const m = mediaFiles[loadedThumbCount];
-                        const icon = document.createElement('div');
-                        icon.className = 'icon';
-                        icon.dataset.index = loadedThumbCount;
-                        const iconImg = document.createElement('img');
-                        iconImg.src = m.type === 'image' ? m.src : getVideoThumbnail(m.src);
-                        iconImg.alt = '';
-                        iconImg.loading = 'lazy';
-                        iconImg.onerror = function() {
-                            if (m.type === 'video') {
-                                this.src = videoFallback;
-                            }
-                        };
-                        icon.appendChild(iconImg);
-
-                        if (m.type === 'video') {
-                            const indicator = document.createElement('div');
-                            indicator.className = 'video-indicator';
-                            indicator.innerHTML = '▶';
-                            icon.appendChild(indicator);
-                        }
-
-                        icon.addEventListener('click', () => openGalleryItem(loadedThumbCount));
-                        thumbStrip.appendChild(icon);
-                        loadedThumbCount++;
-                    }
-                });
-            }, { root: thumbStrip, rootMargin: '100px', threshold: 0.1 });
-
-            // Add sentinel for lazy loading
-            const sentinel = document.createElement('div');
-            sentinel.style.width = '1px';
-            sentinel.style.height = '1px';
-            thumbStrip.appendChild(sentinel);
-            thumbObserver.observe(sentinel);
-
-            // Debounced scroll handlers
-            let scrollTimeout;
-            stripPrev.addEventListener('click', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    thumbStrip.scrollBy({ left: -200, behavior: 'smooth' });
-                }, 16);
-            });
-
-            stripNext.addEventListener('click', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    thumbStrip.scrollBy({ left: 200, behavior: 'smooth' });
-                }, 16);
-            });
-
-            // Modal with navigation
-            let currentModalIdx = -1;
-            let modalEl = null;
-            let currentVideo = null;
-
-            function openGalleryItem(idx){
-                currentModalIdx = idx;
-                const m = mediaFiles[idx];
-                if (!m) return;
-
-                closeModal();
-
-                modalEl = document.createElement('div');
-                modalEl.className = 'gallery-modal';
-
-                const panel = document.createElement('div');
-                panel.className = 'modal-panel';
-
-                const closeBtn = document.createElement('button');
-                closeBtn.className = 'modal-close';
-                closeBtn.innerHTML = '✕';
-                closeBtn.addEventListener('click', closeModal);
-                modalEl.appendChild(closeBtn);
-
-                const mediaContainer = document.createElement('div');
-                mediaContainer.className = 'modal-media-container';
-                panel.appendChild(mediaContainer);
-
-                renderMedia(mediaContainer, m);
-
-                const controls = document.createElement('div');
-                controls.className = 'modal-controls';
-
-                const prevBtn = document.createElement('button');
-                prevBtn.className = 'modal-btn';
-                prevBtn.innerHTML = '◀ PREV';
-                prevBtn.addEventListener('click', () => changeIndex(-1));
-
-                const nextBtn = document.createElement('button');
-                nextBtn.className = 'modal-btn';
-                nextBtn.innerHTML = 'NEXT ▶';
-                nextBtn.addEventListener('click', () => changeIndex(1));
-
-                const fullscreenBtn = document.createElement('button');
-                fullscreenBtn.className = 'modal-btn fullscreen-btn';
-                fullscreenBtn.innerHTML = '⛶ FULLSCREEN';
-                fullscreenBtn.addEventListener('click', () => toggleFullscreen());
-
-                controls.appendChild(prevBtn);
-                controls.appendChild(nextBtn);
-                controls.appendChild(fullscreenBtn);
-                panel.appendChild(controls);
-
-                const info = document.createElement('div');
-                info.className = 'modal-info';
-                info.innerHTML = `<span class="modal-counter">${idx + 1} / ${mediaFiles.length}</span> • ${m.type.toUpperCase()}`;
-                panel.appendChild(info);
-
-                // Thumbnail row in modal (lazy loaded)
-                const modalThumbRow = document.createElement('div');
-                modalThumbRow.className = 'modal-thumb-strip';
-                
-                // Only render visible thumbnails + buffer
-                const visibleRange = 10;
-                const startIdx = Math.max(0, idx - visibleRange);
-                const endIdx = Math.min(mediaFiles.length, idx + visibleRange + 1);
-                
-                for (let i = startIdx; i < endIdx; i++) {
-                    const mm = mediaFiles[i];
-                    const t = document.createElement('div');
-                    t.className = 'modal-thumb' + (i === idx ? ' active' : '');
-                    const ti = document.createElement('img');
-                    ti.src = mm.type === 'image' ? mm.src : getVideoThumbnail(mm.src);
-                    ti.alt = '';
-                    ti.loading = 'lazy';
-                    ti.onerror = function() {
-                        if (mm.type === 'video') {
-                            this.src = videoFallback;
-                        }
+            function preloadImage(src) {
+                if (cache.has(src)) return Promise.resolve(cache.get(src));
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => { 
+                        cache.set(src, img); 
+                        resolve(img); 
                     };
-                    t.appendChild(ti);
-
-                    if (mm.type === 'video') {
-                        const dot = document.createElement('div');
-                        dot.className = 'video-dot';
-                        t.appendChild(dot);
-                    }
-
-                    t.addEventListener('click', () => { changeIndex(i - currentModalIdx); });
-                    modalThumbRow.appendChild(t);
-                }
-                panel.appendChild(modalThumbRow);
-
-                modalEl.appendChild(panel);
-                document.body.appendChild(modalEl);
-
-                modalEl.addEventListener('click', (ev) => { if (ev.target === modalEl) closeModal(); });
-                document.addEventListener('keydown', keyNav);
+                    img.onerror = () => {
+                        console.warn(`Failed to load image: ${src}`);
+                        resolve(null);
+                    };
+                    img.src = src;
+                });
             }
 
-            function renderMedia(container, m){
-                container.innerHTML = '';
-                currentVideo = null;
+            function renderPage(page) {
+                const start = page * pageSize;
+                const end = Math.min(start + pageSize, images.length);
+                const fragment = document.createDocumentFragment();
 
-                if (m.type === 'video'){
-                    const video = document.createElement('video');
-                    video.className = 'modal-media video';
-                    video.src = m.src;
-                    video.controls = true;
-                    video.autoplay = true;
-                    video.playsInline = true;
-                    video.loop = true;
-                    video.style.maxHeight = '70vh';
-                    video.style.maxWidth = '100%';
-                    video.preload = 'metadata';
-                    video.addEventListener('dblclick', () => toggleFullscreen());
-                    container.appendChild(video);
-                    currentVideo = video;
-                    video.addEventListener('loadedmetadata', () => { 
-                        const p = video.play(); 
-                        if (p && p.catch) p.catch(()=>{}); 
-                    });
-                } else {
+                for (let i = start; i < end; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item' + (i % 7 === 0 ? ' featured' : '');
+                    item.setAttribute('role', 'listitem');
+                    
                     const img = document.createElement('img');
-                    img.className = 'modal-media';
-                    img.src = m.src;
-                    img.loading = 'eager';
-                    img.style.maxHeight = '70vh';
-                    img.style.maxWidth = '100%';
-                    img.addEventListener('dblclick', () => toggleFullscreen());
-                    container.appendChild(img);
+                    img.dataset.src = images[i];
+                    img.alt = `Climate action documentation image ${i + 1}`;
+                    img.loading = 'lazy';
+                    item.appendChild(img);
+                    fragment.appendChild(item);
+
+                    if (observer) observer.observe(img);
                 }
+                gallery.appendChild(fragment);
             }
 
-            function changeIndex(delta){
-                currentModalIdx = (currentModalIdx + delta + mediaFiles.length) % mediaFiles.length;
-                const m = mediaFiles[currentModalIdx];
-                const mediaContainer = modalEl.querySelector('.modal-media-container');
-                renderMedia(mediaContainer, m);
+            function setupLazyLoad() {
+                observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const src = img.dataset.src;
+                            if (src) {
+                                preloadImage(src).then(cached => {
+                                    if (cached) {
+                                        img.src = src;
+                                        img.classList.add('loaded');
+                                        delete img.dataset.src;
+                                    }
+                                });
+                                observer.unobserve(img);
+                            }
+                        }
+                    });
+                }, { rootMargin: '100px' });
+            }
 
-                const info = modalEl.querySelector('.modal-info');
-                info.innerHTML = `<span class="modal-counter">${currentModalIdx + 1} / ${mediaFiles.length}</span> • ${m.type.toUpperCase()}`;
-
-                // Update thumbnails (re-render visible range)
-                const modalThumbRow = modalEl.querySelector('.modal-thumb-strip');
-                modalThumbRow.innerHTML = '';
-                
-                const visibleRange = 10;
-                const startIdx = Math.max(0, currentModalIdx - visibleRange);
-                const endIdx = Math.min(mediaFiles.length, currentModalIdx + visibleRange + 1);
-                
-                for (let i = startIdx; i < endIdx; i++) {
-                    const mm = mediaFiles[i];
-                    const t = document.createElement('div');
-                    t.className = 'modal-thumb' + (i === currentModalIdx ? ' active' : '');
-                    const ti = document.createElement('img');
-                    ti.src = mm.type === 'image' ? mm.src : getVideoThumbnail(mm.src);
-                    ti.alt = '';
-                    ti.loading = 'lazy';
-                    ti.onerror = function() {
-                        if (mm.type === 'video') {
-                            this.src = videoFallback;
+            function setupThumbs() {
+                const fragment = document.createDocumentFragment();
+                images.forEach((src, i) => {
+                    const icon = document.createElement('div');
+                    icon.className = 'icon';
+                    icon.setAttribute('role', 'listitem');
+                    icon.setAttribute('tabindex', '0');
+                    icon.setAttribute('aria-label', `View image ${i + 1}`);
+                    
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = '';
+                    img.loading = 'lazy';
+                    icon.appendChild(img);
+                    
+                    const handleClick = () => {
+                        const items = gallery.querySelectorAll('.gallery-item');
+                        if (items[i]) items[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    };
+                    
+                    icon.onclick = handleClick;
+                    icon.onkeydown = (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleClick();
                         }
                     };
-                    t.appendChild(ti);
+                    
+                    fragment.appendChild(icon);
+                });
+                thumbStrip.appendChild(fragment);
+            }
 
-                    if (mm.type === 'video') {
-                        const dot = document.createElement('div');
-                        dot.className = 'video-dot';
-                        t.appendChild(dot);
+            function setupScroll() {
+                let ticking = false;
+                gallery.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            const scrolled = gallery.scrollTop + gallery.clientHeight;
+                            const total = gallery.scrollHeight;
+                            if (scrolled > total - 400 && currentPage * pageSize < images.length) {
+                                currentPage++;
+                                renderPage(currentPage);
+                            }
+                            ticking = false;
+                        });
+                        ticking = true;
                     }
-
-                    t.addEventListener('click', () => { changeIndex(i - currentModalIdx); });
-                    modalThumbRow.appendChild(t);
-                }
-
-                // Scroll active thumbnail into view
-                const activeThumb = modalThumbRow.querySelector('.modal-thumb.active');
-                if (activeThumb) {
-                    activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                }
+                });
             }
 
-            function closeModal(){
-                if (!modalEl) return;
-                if (currentVideo) { 
-                    try{ 
-                        currentVideo.pause(); 
-                        currentVideo.src = '';
-                        currentVideo.load();
-                    }catch(e){} 
-                }
-                document.removeEventListener('keydown', keyNav);
-                modalEl.remove(); 
-                modalEl = null;
-                currentVideo = null;
-            }
+            if (stripPrev) stripPrev.onclick = () => thumbStrip.scrollBy({ left: -200, behavior: 'smooth' });
+            if (stripNext) stripNext.onclick = () => thumbStrip.scrollBy({ left: 200, behavior: 'smooth' });
+            if (stripInfo) stripInfo.textContent = `${images.length} IMAGES`;
 
-            function keyNav(e){
-                if (!modalEl) return;
-                if (e.key === 'Escape') return closeModal();
-                if (e.key === 'ArrowRight') return changeIndex(1);
-                if (e.key === 'ArrowLeft') return changeIndex(-1);
-                if (e.key === 'f' || e.key === 'F') return toggleFullscreen();
-            }
+            setupLazyLoad();
+            renderPage(0);
+            setupThumbs();
+            setupScroll();
 
-            function toggleFullscreen(){
-                if (!modalEl) return;
-                const mediaEl = modalEl.querySelector('.modal-media');
-                if (!mediaEl) return;
-
-                const toRequest = mediaEl.requestFullscreen || mediaEl.webkitRequestFullscreen || mediaEl.msRequestFullscreen;
-                const toExit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
-                
-                if (document.fullscreenElement || document.webkitFullscreenElement) {
-                    if (toExit) toExit.call(document);
-                } else {
-                    if (toRequest) toRequest.call(mediaEl);
-                }
-            }
+            // Preload first 6 images
+            images.slice(0, 6).forEach(src => preloadImage(src));
         })();
     </script>
 </body>
