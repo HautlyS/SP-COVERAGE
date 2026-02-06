@@ -923,9 +923,12 @@
                 overflow-y: auto;
                 overflow-x: hidden;
                 gap: 15px;
-                padding: 0;
-                position: relative;
+                padding: 10px;
+                position: absolute;
                 height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
             }
             
             .slide > * {
@@ -933,6 +936,11 @@
                 grid-column: unset !important;
                 grid-row: unset !important;
                 flex-shrink: 0;
+                position: relative !important;
+            }
+            
+            .slide .poster-frame {
+                position: relative !important;
             }
             
             .block { padding: 20px; min-height: auto; }
@@ -993,7 +1001,7 @@
             
             .slide { 
                 gap: 12px;
-                padding: 0;
+                padding: 10px;
             }
             
             .block { 
