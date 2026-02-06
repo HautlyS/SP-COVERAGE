@@ -900,21 +900,353 @@
             letter-spacing: 3px;
         }
 
-        /* Responsive */
+        /* Mobile First Responsive */
         @media (max-width: 900px) {
-            .slide { display: flex; flex-direction: column; overflow-y: auto; }
-            .poster-frame { height: 300px; }
-            .title-xl { font-size: 4rem; letter-spacing: -2px; }
-            .app-container { padding: 10px; }
-            .demand-card { grid-column: span 6; }
-            .cta-section { flex-direction: column; }
-            .cta-content, .cta-actions { flex: none; width: 100%; }
-            .thumb-strip .icon { width: 40px; height: 40px; }
+            .app-container { 
+                padding: 15px; 
+                gap: 15px;
+                grid-template-rows: auto 1fr 60px;
+            }
+            
+            header { 
+                flex-direction: row;
+                justify-content: space-between;
+                padding-top: 5px;
+            }
+            
+            .logo { font-size: 1.6rem; }
+            .system-specs { font-size: 0.58rem; line-height: 1.3; }
+            
+            .slide { 
+                display: flex !important;
+                flex-direction: column;
+                overflow-y: auto;
+                overflow-x: hidden;
+                gap: 15px;
+                padding: 0;
+                position: relative;
+                height: 100%;
+            }
+            
+            .slide > * {
+                width: 100% !important;
+                grid-column: unset !important;
+                grid-row: unset !important;
+                flex-shrink: 0;
+            }
+            
+            .block { padding: 20px; min-height: auto; }
+            .title-xl { font-size: 3rem; letter-spacing: -2px; line-height: 0.85; }
+            .poster-frame { height: 350px !important; width: 100% !important; }
+            
+            .gallery { 
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 180px;
+                height: 400px;
+            }
+            
+            .demand-card { min-height: 200px; }
+            .demands-header { min-height: 150px; }
+            .hashtag-banner { min-height: 60px; font-size: 1rem; }
+            
+            .cta-section { 
+                flex-direction: column;
+                padding: 25px;
+                min-height: 400px;
+            }
+            
+            footer { 
+                gap: 10px;
+                padding: 0;
+            }
+            
+            .nav-trigger { 
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
         }
 
         @media (max-width: 600px) {
-            .thumb-strip .icon { width: 36px; height: 36px; }
-            .modal-thumb { width: 44px; height: 44px; }
+            body { font-size: 13px; }
+            
+            .app-container { 
+                padding: 10px;
+                gap: 10px;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 8px;
+            }
+            
+            .logo { 
+                font-size: 1.4rem;
+                line-height: 0.9;
+            }
+            
+            .system-specs { 
+                font-size: 0.5rem;
+                line-height: 1.2;
+            }
+            
+            .slide { 
+                gap: 12px;
+                padding: 0;
+            }
+            
+            .block { 
+                padding: 18px;
+                border-width: 2px;
+            }
+            
+            .title-xl { 
+                font-size: 2.2rem;
+                letter-spacing: -1px;
+                line-height: 0.9;
+            }
+            
+            .poster-frame { 
+                height: 280px !important;
+                position: relative;
+            }
+            
+            .profile-photo-container { 
+                width: 45px;
+                height: 45px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .badge-link { 
+                width: 30px;
+                height: 30px;
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .crew-tag { 
+                font-size: 0.55rem;
+                padding: 3px 6px;
+            }
+            
+            .demand-card {
+                min-height: 180px;
+                padding: 20px;
+            }
+            
+            .demand-card h3 { 
+                font-size: 0.95rem;
+                margin-top: 35px;
+                line-height: 1.3;
+            }
+            
+            .demand-card p { 
+                font-size: 0.72rem;
+                line-height: 1.5;
+            }
+            
+            .demand-number { 
+                font-size: 2.5rem;
+                top: 12px;
+                right: 15px;
+            }
+            
+            .demand-icon { 
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+            
+            .demands-header { 
+                min-height: 140px;
+                padding: 25px 20px;
+            }
+            
+            .demands-header h2 { 
+                font-size: 2.2rem;
+                line-height: 1;
+            }
+            
+            .demands-header .subtitle { 
+                font-size: 0.72rem;
+                margin-top: 8px;
+            }
+            
+            .hashtag-banner { 
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+                padding: 15px 10px;
+                min-height: 50px;
+                line-height: 1.2;
+            }
+            
+            .gallery { 
+                grid-template-columns: 1fr;
+                grid-auto-rows: 220px;
+                height: 500px;
+                gap: 8px;
+            }
+            
+            .gallery-item.featured { 
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            
+            .thumb-strip .icon { 
+                width: 38px;
+                height: 38px;
+            }
+            
+            .strip-nav-btn { 
+                width: 26px;
+                height: 26px;
+                font-size: 0.85rem;
+            }
+            
+            .strip-info { 
+                font-size: 0.58rem;
+                padding: 0 5px;
+            }
+            
+            .theater-content { 
+                padding: 60px 12px 12px;
+            }
+            
+            .theater-image { 
+                max-height: calc(100vh - 150px);
+                border-width: 2px;
+            }
+            
+            .theater-caption { 
+                font-size: 0.85rem;
+                margin-top: 12px;
+            }
+            
+            .theater-close { 
+                width: 44px;
+                height: 44px;
+                top: 12px;
+                right: 12px;
+                font-size: 1.3rem;
+            }
+            
+            .theater-nav { 
+                width: 44px;
+                height: 44px;
+                font-size: 1.4rem;
+            }
+            
+            .theater-nav.prev { left: 12px; }
+            .theater-nav.next { right: 12px; }
+            
+            .theater-fullscreen { 
+                bottom: 12px;
+                right: 12px;
+                padding: 10px 16px;
+                font-size: 0.7rem;
+            }
+            
+            .theater-counter { 
+                top: 12px;
+                left: 12px;
+                font-size: 0.8rem;
+            }
+            
+            .nav-trigger { 
+                padding: 12px 18px;
+                font-size: 0.85rem;
+                clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
+            }
+            
+            .progress-bar { height: 6px; }
+            
+            .number-large { 
+                font-size: 2.2rem;
+                margin-top: -12px;
+            }
+            
+            .cta-section {
+                min-height: 350px;
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .cta-content h3 { 
+                font-size: 1.6rem;
+                margin-bottom: 12px;
+            }
+            
+            .cta-content p { 
+                font-size: 0.72rem;
+                line-height: 1.5;
+                margin-bottom: 12px;
+            }
+            
+            .action-item { 
+                padding: 14px;
+                gap: 12px;
+            }
+            
+            .action-icon { font-size: 1.3rem; }
+            
+            .action-text { font-size: 0.72rem; }
+            
+            .action-text strong { 
+                font-size: 0.78rem;
+                margin-bottom: 4px;
+            }
+            
+            footer { 
+                padding: 0;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .app-container { padding: 8px; gap: 8px; }
+            
+            .logo { font-size: 1.2rem; }
+            
+            .system-specs { font-size: 0.45rem; }
+            
+            .slide { gap: 10px; }
+            
+            .block { padding: 15px; }
+            
+            .title-xl { font-size: 1.8rem; }
+            
+            .poster-frame { height: 240px !important; }
+            
+            .demand-card { 
+                min-height: 160px;
+                padding: 16px;
+            }
+            
+            .demand-card h3 { font-size: 0.85rem; }
+            .demand-card p { font-size: 0.68rem; }
+            
+            .demands-header { 
+                min-height: 120px;
+                padding: 18px 15px;
+            }
+            
+            .demands-header h2 { font-size: 1.8rem; }
+            
+            .nav-trigger { 
+                padding: 10px 15px;
+                font-size: 0.75rem;
+            }
+            
+            .gallery { 
+                grid-auto-rows: 200px;
+                height: 450px;
+            }
+            
+            .cta-section { 
+                min-height: 320px;
+                padding: 18px;
+            }
         }
 
         /* Loading skeleton */
