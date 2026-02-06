@@ -1158,6 +1158,51 @@
                     #CLIMATEJUSTICENOW #COP30 #EARTHGUARDIANS
                 </div>
             </section>
+
+            <!-- SLIDE 5: BUDGET -->
+            <section class="slide" aria-label="Slide 5: Budget breakdown">
+                <div class="block block-lime" style="grid-column: span 12; grid-row: span 2;">
+                    <h2 class="title-xl" style="font-size: 3rem; letter-spacing: -2px; text-align: center;">PROJECT BUDGET</h2>
+                </div>
+
+                <div class="block block-dark" style="grid-column: span 4; grid-row: span 5;">
+                    <span class="demand-icon">🚗</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">TRANSPORTATION</h3>
+                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Coverage for 5 team members: RCC, Crew Leader, Crew Member, and 2x Wisdom Advisers. Ground transport to event locations and documentation sites.</p>
+                </div>
+
+                <div class="block block-pink" style="grid-column: span 4; grid-row: span 5;">
+                    <span class="demand-icon">🏠</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px; color: white;">ACCOMMODATION</h3>
+                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5; color: white;">Lodging for the full team during COP30 coverage period. Strategic location for rapid response to climate actions.</p>
+                </div>
+
+                <div class="block block-white" style="grid-column: span 4; grid-row: span 5;">
+                    <span class="demand-icon">🍽️</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">MEALS</h3>
+                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Daily sustenance for 5 crew members throughout the documentation period. Essential for maintaining team energy during intensive coverage.</p>
+                </div>
+
+                <div class="block block-lime" style="grid-column: span 6; grid-row: span 5;">
+                    <span class="demand-icon">📡</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">COMMUNICATION & OUTREACH</h3>
+                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Internet connectivity, mobile data, social media promotion, press materials, and digital outreach tools. Ensuring real-time documentation and global reach of climate action coverage.</p>
+                </div>
+
+                <div class="block block-dark" style="grid-column: span 6; grid-row: span 5;">
+                    <span class="demand-icon">🎫</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">TICKETS & ACCREDITATION</h3>
+                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Official event access, press credentials, and necessary permits for comprehensive COP30 documentation and Indigenous Initiative + Massive Attack coverage.</p>
+                </div>
+
+                <div class="block block-pink" style="grid-column: span 12; grid-row: span 3; display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h3 style="font-family: 'Syne'; font-size: 2.5rem; color: white; margin: 0;">TOTAL BUDGET: $500 USD</h3>
+                        <p style="font-size: 0.9rem; margin-top: 10px; color: white;">Grassroots funding for youth-led climate documentation</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1-g2iwmRo50DlIYHG88KgasDiqpHok9VP/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="background: white; color: var(--pink); padding: 20px 40px; font-family: 'Archivo Black'; font-size: 1.2rem; text-decoration: none; border: 3px solid white; transition: 0.3s;" onmouseover="this.style.background='var(--lime)'; this.style.color='var(--obsidian)'" onmouseout="this.style.background='white'; this.style.color='var(--pink)'">VIEW FULL PROJECT PDF</a>
+                </div>
+            </section>
             
         </main>
 
@@ -1325,6 +1370,7 @@
                     const item = document.createElement('div');
                     item.className = 'gallery-item' + (i % 7 === 0 ? ' featured' : '');
                     item.setAttribute('role', 'listitem');
+                    item.dataset.index = i;
                     
                     const img = document.createElement('img');
                     img.dataset.src = images[i];
@@ -1504,9 +1550,8 @@
 
             gallery.addEventListener('click', (e) => {
                 const item = e.target.closest('.gallery-item');
-                if (item) {
-                    const items = Array.from(gallery.querySelectorAll('.gallery-item'));
-                    openTheater(items.indexOf(item));
+                if (item && item.dataset.index) {
+                    openTheater(parseInt(item.dataset.index));
                 }
             });
         })();
