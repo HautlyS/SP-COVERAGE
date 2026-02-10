@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Earth Guardians South America - COP30 Climate Action Coverage. Indigenous Initiative + Massive Attack 2025. Youth-led environmental activism and documentation.">
-    <meta name="keywords" content="Earth Guardians, COP30, climate action, indigenous rights, environmental activism, South America">
+    <meta name="description"
+        content="Earth Guardians South America - COP30 Climate Action Coverage. Indigenous Initiative + Massive Attack 2025. Youth-led environmental activism and documentation.">
+    <meta name="keywords"
+        content="Earth Guardians, COP30, climate action, indigenous rights, environmental activism, South America">
     <meta property="og:title" content="EARTH GUARDIANS | SP COVERAGE">
-    <meta property="og:description" content="Youth-led climate activism documentation from São Paulo. COP30 Indigenous Initiative + Massive Attack 2025.">
+    <meta property="og:description"
+        content="Youth-led climate activism documentation from São Paulo. COP30 Indigenous Initiative + Massive Attack 2025.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <title>EARTH GUARDIANS | SP COVERAGE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --obsidian: #050505;
@@ -20,6 +26,7 @@
             --pink: #ff0055;
             --paper: #e8e8e8;
             --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
         }
 
         * {
@@ -27,15 +34,21 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
-        body, .block, .nav-trigger, .gallery-item, .modal-thumb, .thumb-strip .icon {
+
+        body,
+        .block,
+        .nav-trigger,
+        .gallery-item,
+        .modal-thumb,
+        .thumb-strip .icon {
             cursor: crosshair;
         }
-        
-        a, button {
+
+        a,
+        button {
             cursor: pointer;
         }
-        
+
         *:focus-visible {
             outline: 2px solid var(--lime);
             outline-offset: 2px;
@@ -65,7 +78,7 @@
         .paper-grain {
             position: fixed;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
             pointer-events: none;
             z-index: 999;
         }
@@ -152,21 +165,45 @@
             contain: layout style;
         }
 
-        .block-lime { background: var(--lime); }
-        .block-lime:hover { filter: invert(1) hue-rotate(180deg); }
+        .block-lime {
+            background: var(--lime);
+        }
 
-        .block-pink { background: var(--pink); color: white; }
-        .block-pink:hover { filter: invert(1) hue-rotate(180deg); }
+        .block-lime:hover {
+            filter: invert(1) hue-rotate(180deg);
+        }
 
-        .block-dark { background: #111; color: var(--paper); border: 2px solid var(--paper); }
-        .block-dark:hover { filter: invert(1) hue-rotate(180deg); }
+        .block-pink {
+            background: var(--pink);
+            color: white;
+        }
 
-        .block-white { background: #f5f5f5; color: var(--obsidian); }
-        .block-white:hover { filter: invert(1) hue-rotate(180deg); }
+        .block-pink:hover {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        .block-dark {
+            background: #111;
+            color: var(--paper);
+            border: 2px solid var(--paper);
+        }
+
+        .block-dark:hover {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        .block-white {
+            background: #f5f5f5;
+            color: var(--obsidian);
+        }
+
+        .block-white:hover {
+            filter: invert(1) hue-rotate(180deg);
+        }
 
         .title-xl {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(2rem, 8vw, 10rem);
+            font-size: clamp(1rem, 5vw, 6rem);
             line-height: 0.8;
             letter-spacing: -5px;
             word-break: break-all;
@@ -217,9 +254,17 @@
             padding: 6px;
         }
 
-        .gallery::-webkit-scrollbar { width: 6px; }
-        .gallery::-webkit-scrollbar-track { background: #000; }
-        .gallery::-webkit-scrollbar-thumb { background: var(--lime); }
+        .gallery::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .gallery::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        .gallery::-webkit-scrollbar-thumb {
+            background: var(--lime);
+        }
 
         .gallery-item {
             position: relative;
@@ -254,7 +299,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, rgba(209,255,0,0.05) 0%, rgba(255,0,85,0.05) 100%);
+            background: linear-gradient(45deg, rgba(209, 255, 0, 0.05) 0%, rgba(255, 0, 85, 0.05) 100%);
             pointer-events: none;
             mix-blend-mode: overlay;
         }
@@ -274,7 +319,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.95);
             padding: 6px;
             border-top: 2px solid var(--lime);
             display: flex;
@@ -291,21 +336,31 @@
             scroll-behavior: smooth;
         }
 
-        .thumb-strip::-webkit-scrollbar { height: 3px; }
-        .thumb-strip::-webkit-scrollbar-thumb { background: var(--lime); }
+        .thumb-strip::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .thumb-strip::-webkit-scrollbar-thumb {
+            background: var(--lime);
+        }
 
         .thumb-strip .icon {
             width: 50px;
             height: 50px;
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
             flex-shrink: 0;
             transition: border-color 0.2s;
             overflow: hidden;
         }
 
-        .thumb-strip .icon:hover { border-color: var(--pink); }
-        .thumb-strip .icon.active { border-color: var(--lime); }
+        .thumb-strip .icon:hover {
+            border-color: var(--pink);
+        }
+
+        .thumb-strip .icon.active {
+            border-color: var(--lime);
+        }
 
         .thumb-strip .icon img {
             width: 100%;
@@ -324,7 +379,10 @@
             flex-shrink: 0;
         }
 
-        .strip-nav-btn:hover { background: var(--pink); color: white; }
+        .strip-nav-btn:hover {
+            background: var(--pink);
+            color: white;
+        }
 
         .strip-info {
             font-size: 0.6rem;
@@ -337,17 +395,21 @@
         .theater-modal {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.97);
+            background: rgba(0, 0, 0, 0.97);
             z-index: 5000;
             display: none;
             opacity: 0;
             animation: fadeIn 0.3s ease forwards;
         }
 
-        .theater-modal.active { display: flex; }
+        .theater-modal.active {
+            display: flex;
+        }
 
         @keyframes fadeIn {
-            to { opacity: 1; }
+            to {
+                opacity: 1;
+            }
         }
 
         .theater-content {
@@ -365,7 +427,7 @@
             max-height: calc(100vh - 180px);
             object-fit: contain;
             border: 3px solid var(--lime);
-            box-shadow: 0 0 40px rgba(209,255,0,0.3);
+            box-shadow: 0 0 40px rgba(209, 255, 0, 0.3);
         }
 
         .theater-caption {
@@ -402,7 +464,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             border: 2px solid var(--lime);
             color: var(--lime);
             width: 50px;
@@ -417,14 +479,19 @@
             color: var(--obsidian);
         }
 
-        .theater-nav.prev { left: 20px; }
-        .theater-nav.next { right: 20px; }
+        .theater-nav.prev {
+            left: 20px;
+        }
+
+        .theater-nav.next {
+            right: 20px;
+        }
 
         .theater-fullscreen {
             position: absolute;
             bottom: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             border: 2px solid var(--lime);
             color: var(--lime);
             padding: 10px 20px;
@@ -476,13 +543,15 @@
         .progress-bar {
             flex-grow: 1;
             height: 10px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             position: relative;
         }
 
         .progress-fill {
             position: absolute;
-            top: 0; left: 0; height: 100%;
+            top: 0;
+            left: 0;
+            height: 100%;
             background: var(--lime);
             width: 25%;
             transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
@@ -499,14 +568,17 @@
 
         .glitch-static {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 2px);
             pointer-events: none;
         }
 
         .number-large {
             font-family: 'Syne', sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             line-height: 1;
             margin-top: -20px;
         }
@@ -554,15 +626,35 @@
         }
 
         @keyframes liquidPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-            25% { transform: scale(1.1) rotate(5deg); }
-            50% { transform: scale(1.05) rotate(-5deg); opacity: 0.8; }
-            75% { transform: scale(1.08) rotate(3deg); }
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+
+            25% {
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            50% {
+                transform: scale(1.05) rotate(-5deg);
+                opacity: 0.8;
+            }
+
+            75% {
+                transform: scale(1.08) rotate(3deg);
+            }
         }
 
         @keyframes starSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .profile-photo-container:hover .profile-photo {
@@ -619,15 +711,20 @@
         }
 
         @keyframes float {
-            from { transform: translateY(0); }
-            to { transform: translateY(-30px); }
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-30px);
+            }
         }
 
         .demands-header h2 {
             font-family: 'Archivo Black', sans-serif;
             font-size: 4rem;
             color: var(--lime);
-            text-shadow: 4px 4px 0px var(--pink), 0 0 20px rgba(0,0,0,0.8);
+            text-shadow: 4px 4px 0px var(--pink), 0 0 20px rgba(0, 0, 0, 0.8);
             position: relative;
             z-index: 2;
             margin: 0;
@@ -636,7 +733,7 @@
         .demands-header .subtitle {
             font-size: 0.8rem;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(0,0,0,0.9);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
             margin-top: 10px;
             position: relative;
             z-index: 2;
@@ -659,7 +756,7 @@
 
         .demand-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .demand-card::before {
@@ -673,22 +770,56 @@
             pointer-events: none;
         }
 
-        .demand-card.demand-1::before { background: var(--lime); }
-        .demand-card.demand-1 { border-left: 3px solid var(--lime); }
-        .demand-card.demand-2::before { background: #00d4ff; }
-        .demand-card.demand-2 { border-left: 3px solid #00d4ff; }
-        .demand-card.demand-3::before { background: var(--pink); }
-        .demand-card.demand-3 { border-left: 3px solid var(--pink); }
-        .demand-card.demand-4::before { background: #ff9500; }
-        .demand-card.demand-4 { border-left: 3px solid #ff9500; }
-        .demand-card.demand-5::before { background: #9b59b6; }
-        .demand-card.demand-5 { border-left: 3px solid #9b59b6; }
-        .demand-card.demand-6::before { background: #2ecc71; }
-        .demand-card.demand-6 { border-left: 3px solid #2ecc71; }
+        .demand-card.demand-1::before {
+            background: var(--lime);
+        }
+
+        .demand-card.demand-1 {
+            border-left: 3px solid var(--lime);
+        }
+
+        .demand-card.demand-2::before {
+            background: #00d4ff;
+        }
+
+        .demand-card.demand-2 {
+            border-left: 3px solid #00d4ff;
+        }
+
+        .demand-card.demand-3::before {
+            background: var(--pink);
+        }
+
+        .demand-card.demand-3 {
+            border-left: 3px solid var(--pink);
+        }
+
+        .demand-card.demand-4::before {
+            background: #ff9500;
+        }
+
+        .demand-card.demand-4 {
+            border-left: 3px solid #ff9500;
+        }
+
+        .demand-card.demand-5::before {
+            background: #9b59b6;
+        }
+
+        .demand-card.demand-5 {
+            border-left: 3px solid #9b59b6;
+        }
+
+        .demand-card.demand-6::before {
+            background: #2ecc71;
+        }
+
+        .demand-card.demand-6 {
+            border-left: 3px solid #2ecc71;
+        }
 
         .demand-icon {
             font-size: 2rem;
-            margin-bottom: 10px;
             z-index: 10;
             position: relative;
             display: block;
@@ -700,7 +831,6 @@
             font-weight: 800;
             opacity: 0.2;
             position: absolute;
-            top: 15px;
             right: 20px;
             z-index: 10;
             color: inherit;
@@ -709,13 +839,13 @@
 
         .demand-card h3 {
             font-family: 'Archivo Black', sans-serif;
-            font-size: 1rem;
+            font-size: 2vh;
             margin-bottom: 12px;
             line-height: 1.2;
             color: #ffffff;
             z-index: 10;
             position: relative;
-            margin-top: 50px;
+
         }
 
         .demand-card p {
@@ -732,8 +862,8 @@
         .demands-hero {
             grid-column: span 12;
             grid-row: span 3;
-            background: linear-gradient(135deg, rgba(209,255,0,0.06), rgba(255,0,85,0.04));
-            border: 2px solid rgba(209,255,0,0.12);
+            background: linear-gradient(135deg, rgba(209, 255, 0, 0.06), rgba(255, 0, 85, 0.04));
+            border: 2px solid rgba(209, 255, 0, 0.12);
             padding: 28px;
             display: flex;
             gap: 20px;
@@ -742,8 +872,18 @@
             overflow: hidden;
         }
 
-        .demands-hero .hero-text h2 { font-family: 'Archivo Black'; font-size: 2.6rem; color: var(--lime); margin:0; }
-        .demands-hero .hero-text p { font-size: 0.95rem; color: #f0f0f0; max-width: 70%; }
+        .demands-hero .hero-text h2 {
+            font-family: 'Archivo Black';
+            font-size: 2.6rem;
+            color: var(--lime);
+            margin: 0;
+        }
+
+        .demands-hero .hero-text p {
+            font-size: 0.95rem;
+            color: #f0f0f0;
+            max-width: 70%;
+        }
 
         .demand-grid {
             grid-column: span 12;
@@ -751,12 +891,12 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 18px;
-            align-items:stretch;
+            align-items: stretch;
         }
 
         .demand-card.visual {
-            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
-            border: 1px solid rgba(255,255,255,0.06);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.15));
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 22px;
             display: flex;
             flex-direction: column;
@@ -767,7 +907,10 @@
             transition: transform 0.36s ease, box-shadow 0.36s ease;
         }
 
-        .demand-card.visual:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .demand-card.visual:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
 
         .demand-card.visual .icon {
             font-size: 2.4rem;
@@ -776,18 +919,32 @@
             display: grid;
             place-items: center;
             border-radius: 12px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.12));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.12));
             color: var(--lime);
             flex-shrink: 0;
         }
 
-        .demand-card.visual h3 { font-family: 'Archivo Black'; font-size: 1.1rem; margin: 0; color: var(--paper); }
+        .demand-card.visual h3 {
+            font-family: 'Archivo Black';
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--paper);
+        }
 
-        .demand-card.visual .lead { font-size: 0.85rem; color: #dcdcdc; opacity:0.95; }
+        .demand-card.visual .lead {
+            font-size: 0.85rem;
+            color: #dcdcdc;
+            opacity: 0.95;
+        }
 
         .demand-number-badge {
-            position: absolute; top: 12px; right: 12px; font-family: 'Syne'; font-weight:800;
-            font-size: 2rem; color: rgba(255,255,255,0.06);
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-family: 'Syne';
+            font-weight: 800;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.06);
         }
 
         /* Modal / Details */
@@ -798,23 +955,43 @@
             align-items: center;
             justify-content: center;
             z-index: 9000;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             padding: 40px;
         }
 
-        .demand-modal.active { display: flex; }
-
-        .demand-modal .panel {
-            background: #0f0f0f; border: 2px solid var(--lime); padding: 28px; max-width: 900px; width: 100%; color: var(--paper);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+        .demand-modal.active {
+            display: flex;
         }
 
-        .demand-modal .panel h3 { font-family: 'Archivo Black'; font-size: 1.8rem; margin: 0 0 10px 0; }
-        .demand-modal .panel p { font-size: 1rem; line-height: 1.6; }
+        .demand-modal .panel {
+            background: #0f0f0f;
+            border: 2px solid var(--lime);
+            padding: 28px;
+            max-width: 900px;
+            width: 100%;
+            color: var(--paper);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+        }
+
+        .demand-modal .panel h3 {
+            font-family: 'Archivo Black';
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+        }
+
+        .demand-modal .panel p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
 
         @media (max-width: 900px) {
-            .demand-grid { grid-template-columns: 1fr; }
-            .demands-hero .hero-text p { max-width: 100%; }
+            .demand-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demands-hero .hero-text p {
+                max-width: 100%;
+            }
         }
 
         /* CTA Section */
@@ -834,6 +1011,7 @@
             flex: 1;
             padding-right: 20px;
         }
+
         .cta-content h3 {
             font-family: 'Archivo Black', sans-serif;
             font-size: 2rem;
@@ -859,13 +1037,13 @@
             align-items: center;
             gap: 15px;
             padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
 
         .action-item:hover {
-            background: rgba(209,255,0,0.1);
+            background: rgba(209, 255, 0, 0.1);
             border-color: var(--lime);
         }
 
@@ -880,6 +1058,7 @@
         .action-text {
             flex: 1;
         }
+
         .action-text strong {
             display: block;
             color: var(--lime);
@@ -896,38 +1075,38 @@
             justify-content: center;
             align-items: center;
             font-family: 'Archivo Black', sans-serif;
-            font-size: 1.5rem;
+            font-size: 2.5vh;
             letter-spacing: 3px;
         }
 
         /* Mobile First Responsive */
         @media (max-width: 900px) {
-            .app-container { 
-                padding: 12px; 
+            .app-container {
+                padding: 12px;
                 gap: 12px;
                 grid-template-rows: auto 1fr 55px;
             }
-            
-            header { 
+
+            header {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
                 gap: 8px;
                 padding-top: 0;
             }
-            
-            .logo { 
-                font-size: 1.5rem; 
+
+            .logo {
+                font-size: 1.5rem;
                 line-height: 0.85;
             }
-            
-            .system-specs { 
-                font-size: 0.55rem; 
+
+            .system-specs {
+                font-size: 0.55rem;
                 line-height: 1.3;
                 text-align: center;
             }
-            
-            .slide { 
+
+            .slide {
                 display: flex !important;
                 flex-direction: column;
                 overflow-y: auto;
@@ -942,91 +1121,148 @@
                 -webkit-overflow-scrolling: touch;
                 scroll-behavior: smooth;
             }
-            
+
             /* Improve scroll performance */
-            .slide > * {
+            .slide>* {
                 will-change: auto;
             }
-            
-            .slide > * {
+
+            .slide>* {
                 width: 100% !important;
                 grid-column: unset !important;
                 grid-row: unset !important;
                 flex-shrink: 0;
                 position: relative !important;
             }
-            
+
             /* Slide 1 - Manifesto ordering */
-            .slide:nth-child(1) .block:nth-child(1) { order: 1; }
-            .slide:nth-child(1) .poster-frame { order: 2; }
-            .slide:nth-child(1) .block:nth-child(3) { order: 3; }
-            .slide:nth-child(1) .block:nth-child(4) { order: 4; }
-            
+            .slide:nth-child(1) .block:nth-child(1) {
+                order: 1;
+            }
+
+            .slide:nth-child(1) .poster-frame {
+                order: 2;
+            }
+
+            .slide:nth-child(1) .block:nth-child(3) {
+                order: 3;
+            }
+
+            .slide:nth-child(1) .block:nth-child(4) {
+                order: 4;
+            }
+
             /* Slide 2 - Team ordering */
-            .slide:nth-child(2) .block:nth-child(1) { order: 1; }
-            .slide:nth-child(2) .block:nth-child(2) { order: 2; }
-            .slide:nth-child(2) .block:nth-child(3) { order: 3; }
-            .slide:nth-child(2) .block:nth-child(4) { order: 4; }
-            .slide:nth-child(2) .block:nth-child(5) { order: 5; }
-            .slide:nth-child(2) .block:nth-child(6) { order: 6; }
-            
+            .slide:nth-child(2) .block:nth-child(1) {
+                order: 1;
+            }
+
+            .slide:nth-child(2) .block:nth-child(2) {
+                order: 2;
+            }
+
+            .slide:nth-child(2) .block:nth-child(3) {
+                order: 3;
+            }
+
+            .slide:nth-child(2) .block:nth-child(4) {
+                order: 4;
+            }
+
+            .slide:nth-child(2) .block:nth-child(5) {
+                order: 5;
+            }
+
+            .slide:nth-child(2) .block:nth-child(6) {
+                order: 6;
+            }
+
             /* Slide 3 - Gallery ordering */
-            .slide:nth-child(3) .poster-frame { order: 1; }
-            .slide:nth-child(3) .block:nth-child(2) { order: 2; }
-            .slide:nth-child(3) .block:nth-child(3) { order: 3; }
-            
+            .slide:nth-child(3) .poster-frame {
+                order: 1;
+            }
+
+            .slide:nth-child(3) .block:nth-child(2) {
+                order: 2;
+            }
+
+            .slide:nth-child(3) .block:nth-child(3) {
+                order: 3;
+            }
+
             /* Slide 4 - Demands ordering */
-            .slide:nth-child(4) .demands-header { order: 1; }
-            .slide:nth-child(4) .demand-card { order: 2; }
-            .slide:nth-child(4) .hashtag-banner { order: 99; }
-            
+            .slide:nth-child(4) .demands-header {
+                order: 1;
+            }
+
+            .slide:nth-child(4) .demand-card {
+                order: 2;
+            }
+
+            .slide:nth-child(4) .hashtag-banner {
+                order: 99;
+            }
+
             /* Slide 5 - Budget ordering */
-            .slide:nth-child(5) > .block:first-child { order: 1; }
-            .slide:nth-child(5) .block { order: 2; }
-            .slide:nth-child(5) > .block:last-child { order: 99; }
-            
+            .slide:nth-child(5)>.block:first-child {
+                order: 1;
+            }
+
+            .slide:nth-child(5) .block {
+                order: 2;
+            }
+
+            .slide:nth-child(5)>.block:last-child {
+                order: 99;
+            }
+
             .slide .poster-frame {
                 position: relative !important;
             }
-            
-            .block { 
-                padding: 18px; 
+
+            .block {
+                padding: 10%;
                 min-height: auto;
             }
-            
+
             /* Better visual hierarchy on mobile */
-            .block h1, .block h2, .block h3 {
-                margin-bottom: 10px;
+            .block h1,
+            .block h2,
+            .block h3 {
+                margin-bottom: 10%;
             }
-            
+
             .block p {
                 line-height: 1.5;
             }
-            
+
             /* Improve readability */
-            .block-lime, .block-pink, .block-dark, .block-white {
-                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            .block-lime,
+            .block-pink,
+            .block-dark,
+            .block-white {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             }
-            
-            .title-xl { 
-                font-size: 2.8rem; 
-                letter-spacing: -2px; 
+
+            .title-xl {
+                font-size: 2.8rem;
+                letter-spacing: -2px;
                 line-height: 0.85;
             }
-            
-            .poster-frame { 
-                height: 320px !important; 
+
+            .poster-frame {
+                height: 320px !important;
                 width: 100% !important;
             }
-            
-            .gallery { 
+
+            .gallery {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: 160px;
                 height: 380px;
                 padding: 4px;
                 gap: 4px;
             }
-            
+
             /* Gallery overlay info on mobile */
             .poster-frame .block {
                 position: absolute !important;
@@ -1037,24 +1273,24 @@
                 max-width: 100%;
                 z-index: 10;
             }
-            
-            .demand-card { 
+
+            .demand-card {
                 min-height: 180px;
                 padding: 18px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
             }
-            
+
             .demand-card h3 {
                 flex-grow: 0;
             }
-            
+
             .demand-card p {
                 flex-grow: 1;
             }
-            
-            .demands-header { 
+
+            .demands-header {
                 min-height: 130px;
                 padding: 20px;
                 display: flex;
@@ -1062,59 +1298,59 @@
                 justify-content: center;
                 align-items: center;
             }
-            
+
             .demands-header h2 {
                 text-align: center;
                 margin-bottom: 8px;
             }
-            
+
             .demands-header .subtitle {
                 text-align: center;
                 max-width: 90%;
             }
-            
-            .hashtag-banner { 
-                min-height: 55px; 
+
+            .hashtag-banner {
+                min-height: 55px;
                 font-size: 0.95rem;
                 padding: 12px;
             }
-            
-            .cta-section { 
+
+            .cta-section {
                 flex-direction: column;
                 padding: 22px;
                 min-height: 380px;
                 gap: 20px;
             }
-            
+
             .cta-content {
                 padding-right: 0;
             }
-            
+
             .cta-content h3 {
                 font-size: 1.8rem;
                 line-height: 1.1;
             }
-            
+
             .cta-content p {
                 font-size: 0.7rem;
                 line-height: 1.5;
             }
-            
+
             .action-item {
                 flex-direction: row;
                 align-items: flex-start;
             }
-            
+
             .action-icon {
                 flex-shrink: 0;
             }
-            
-            footer { 
+
+            footer {
                 gap: 8px;
                 padding: 0;
             }
-            
-            .nav-trigger { 
+
+            .nav-trigger {
                 padding: 11px 18px;
                 font-size: 0.9rem;
                 min-height: 44px;
@@ -1122,7 +1358,7 @@
                 align-items: center;
                 justify-content: center;
             }
-            
+
             /* Touch-friendly targets */
             .badge-link,
             .profile-photo-container,
@@ -1131,19 +1367,19 @@
                 min-height: 44px;
                 min-width: 44px;
             }
-            
+
             /* Better tap targets for theater controls */
             .theater-close,
             .theater-nav {
                 min-width: 44px;
                 min-height: 44px;
             }
-            
+
             .profile-photo-container {
                 width: 50px;
                 height: 50px;
             }
-            
+
             .badge-link {
                 width: 32px;
                 height: 32px;
@@ -1151,14 +1387,16 @@
         }
 
         @media (max-width: 600px) {
-            body { font-size: 13px; }
-            
-            .app-container { 
+            body {
+                font-size: 13px;
+            }
+
+            .app-container {
                 padding: 8px;
                 gap: 8px;
                 grid-template-rows: auto 1fr 50px;
             }
-            
+
             header {
                 flex-direction: column;
                 align-items: center;
@@ -1166,418 +1404,428 @@
                 gap: 6px;
                 padding-top: 0;
             }
-            
-            .logo { 
+
+            .logo {
                 font-size: 1.3rem;
                 line-height: 0.88;
             }
-            
-            .system-specs { 
+
+            .system-specs {
                 font-size: 0.48rem;
                 line-height: 1.25;
             }
-            
-            .slide { 
+
+            .slide {
                 gap: 10px;
                 padding: 8px;
             }
-            
-            .block { 
-                padding: 16px;
+
+            .block {
+                padding: 10%;
                 border-width: 2px;
             }
-            
-            .title-xl { 
+
+            .title-xl {
                 font-size: 2rem;
                 letter-spacing: -1px;
                 line-height: 0.88;
             }
-            
-            .poster-frame { 
+
+            .poster-frame {
                 height: 260px !important;
                 position: relative;
             }
-            
-            .profile-photo-container { 
+
+            .profile-photo-container {
                 width: 42px;
                 height: 42px;
                 top: 8px;
                 right: 8px;
             }
-            
-            .badge-link { 
+
+            .badge-link {
                 width: 28px;
                 height: 28px;
                 bottom: 8px;
                 right: 8px;
             }
-            
-            .crew-tag { 
+
+            .crew-tag {
                 font-size: 0.52rem;
                 padding: 3px 5px;
             }
-            
+
             .demand-card {
                 min-height: 160px;
                 padding: 16px;
             }
-            
-            .demand-card h3 { 
+
+            .demand-card h3 {
                 font-size: 0.88rem;
-                margin-top: 32px;
                 line-height: 1.25;
             }
-            
-            .demand-card p { 
+
+            .demand-card p {
                 font-size: 0.68rem;
                 line-height: 1.45;
             }
-            
-            .demand-number { 
+
+            .demand-number {
                 font-size: 2.2rem;
                 top: 10px;
                 right: 12px;
             }
-            
-            .demand-icon { 
+
+            .demand-icon {
                 font-size: 1.6rem;
                 margin-bottom: 6px;
             }
-            
-            .demands-header { 
+
+            .demands-header {
                 min-height: 120px;
                 padding: 18px 16px;
             }
-            
-            .demands-header h2 { 
+
+            .demands-header h2 {
                 font-size: 2rem;
                 line-height: 0.95;
             }
-            
-            .demands-header .subtitle { 
+
+            .demands-header .subtitle {
                 font-size: 0.68rem;
                 margin-top: 6px;
             }
-            
-            .hashtag-banner { 
+
+            .hashtag-banner {
                 font-size: 0.78rem;
                 letter-spacing: 0.5px;
                 padding: 12px 8px;
                 min-height: 45px;
                 line-height: 1.3;
             }
-            
-            .gallery { 
+
+            .gallery {
                 grid-template-columns: 1fr;
                 grid-auto-rows: 200px;
                 height: 450px;
                 gap: 6px;
             }
-            
-            .gallery-item.featured { 
+
+            .gallery-item.featured {
                 grid-column: span 1;
                 grid-row: span 1;
             }
-            
-            .thumb-strip .icon { 
+
+            .thumb-strip .icon {
                 width: 36px;
                 height: 36px;
             }
-            
-            .strip-nav-btn { 
+
+            .strip-nav-btn {
                 width: 24px;
                 height: 24px;
                 font-size: 0.8rem;
             }
-            
-            .strip-info { 
+
+            .strip-info {
                 font-size: 0.55rem;
                 padding: 0 4px;
             }
-            
-            .theater-content { 
+
+            .theater-content {
                 padding: 55px 10px 10px;
             }
-            
-            .theater-image { 
+
+            .theater-image {
                 max-height: calc(100vh - 140px);
                 border-width: 2px;
             }
-            
-            .theater-caption { 
+
+            .theater-caption {
                 font-size: 0.8rem;
                 margin-top: 10px;
             }
-            
-            .theater-close { 
+
+            .theater-close {
                 width: 40px;
                 height: 40px;
                 top: 10px;
                 right: 10px;
                 font-size: 1.2rem;
             }
-            
-            .theater-nav { 
+
+            .theater-nav {
                 width: 40px;
                 height: 40px;
                 font-size: 1.3rem;
             }
-            
-            .theater-nav.prev { left: 10px; }
-            .theater-nav.next { right: 10px; }
-            
-            .theater-fullscreen { 
+
+            .theater-nav.prev {
+                left: 10px;
+            }
+
+            .theater-nav.next {
+                right: 10px;
+            }
+
+            .theater-fullscreen {
                 bottom: 10px;
                 right: 10px;
                 padding: 8px 14px;
                 font-size: 0.65rem;
             }
-            
-            .theater-counter { 
+
+            .theater-counter {
                 top: 10px;
                 left: 10px;
                 font-size: 0.75rem;
             }
-            
-            .nav-trigger { 
+
+            .nav-trigger {
                 padding: 10px 16px;
                 font-size: 0.8rem;
                 clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
             }
-            
-            .progress-bar { height: 5px; }
-            
-            .number-large { 
+
+            .progress-bar {
+                height: 5px;
+            }
+
+            .number-large {
                 font-size: 2rem;
                 margin-top: -10px;
             }
-            
+
             .cta-section {
                 min-height: 320px;
                 padding: 16px;
                 gap: 16px;
             }
-            
-            .cta-content h3 { 
+
+            .cta-content h3 {
                 font-size: 1.5rem;
                 margin-bottom: 10px;
             }
-            
-            .cta-content p { 
+
+            .cta-content p {
                 font-size: 0.68rem;
                 line-height: 1.45;
                 margin-bottom: 10px;
             }
-            
-            .action-item { 
+
+            .action-item {
                 padding: 12px;
                 gap: 10px;
             }
-            
-            .action-icon { font-size: 1.2rem; }
-            
-            .action-text { font-size: 0.68rem; }
-            
-            .action-text strong { 
+
+            .action-icon {
+                font-size: 1.2rem;
+            }
+
+            .action-text {
+                font-size: 0.68rem;
+            }
+
+            .action-text strong {
                 font-size: 0.75rem;
                 margin-bottom: 3px;
             }
-            
-            footer { 
+
+            footer {
                 padding: 0;
                 gap: 6px;
             }
         }
 
         @media (max-width: 400px) {
-            .app-container { 
-                padding: 6px; 
+            .app-container {
+                padding: 6px;
                 gap: 6px;
                 grid-template-rows: auto 1fr 45px;
             }
-            
-            .logo { 
+
+            .logo {
                 font-size: 1.1rem;
                 line-height: 0.9;
             }
-            
-            .system-specs { 
+
+            .system-specs {
                 font-size: 0.42rem;
                 line-height: 1.2;
             }
-            
-            .slide { 
+
+            .slide {
                 gap: 8px;
                 padding: 6px;
             }
-            
-            .block { 
+
+            .block {
                 padding: 14px;
                 border-width: 2px;
             }
-            
-            .title-xl { 
+
+            .title-xl {
                 font-size: 1.7rem;
                 letter-spacing: -0.5px;
             }
-            
-            .poster-frame { 
+
+            .poster-frame {
                 height: 220px !important;
             }
-            
+
             .profile-photo-container {
                 width: 38px;
                 height: 38px;
                 top: 6px;
                 right: 6px;
             }
-            
+
             .badge-link {
                 width: 26px;
                 height: 26px;
                 bottom: 6px;
                 right: 6px;
             }
-            
+
             .crew-tag {
                 font-size: 0.48rem;
                 padding: 2px 4px;
             }
-            
-            .demand-card { 
+
+            .demand-card {
                 min-height: 145px;
                 padding: 14px;
             }
-            
-            .demand-card h3 { 
+
+            .demand-card h3 {
                 font-size: 0.8rem;
                 margin-top: 28px;
             }
-            
-            .demand-card p { 
+
+            .demand-card p {
                 font-size: 0.64rem;
                 line-height: 1.4;
             }
-            
+
             .demand-number {
                 font-size: 2rem;
                 top: 8px;
                 right: 10px;
             }
-            
+
             .demand-icon {
                 font-size: 1.4rem;
                 margin-bottom: 5px;
             }
-            
-            .demands-header { 
+
+            .demands-header {
                 min-height: 105px;
                 padding: 14px 12px;
             }
-            
-            .demands-header h2 { 
+
+            .demands-header h2 {
                 font-size: 1.7rem;
                 line-height: 0.92;
             }
-            
+
             .demands-header .subtitle {
                 font-size: 0.62rem;
                 margin-top: 5px;
             }
-            
+
             .hashtag-banner {
                 font-size: 0.7rem;
                 letter-spacing: 0.3px;
                 padding: 10px 6px;
                 min-height: 40px;
             }
-            
-            .nav-trigger { 
+
+            .nav-trigger {
                 padding: 8px 12px;
                 font-size: 0.7rem;
             }
-            
-            .progress-bar { 
+
+            .progress-bar {
                 height: 4px;
             }
-            
-            .gallery { 
+
+            .gallery {
                 grid-auto-rows: 180px;
                 height: 420px;
                 gap: 5px;
             }
-            
+
             .thumb-strip .icon {
                 width: 32px;
                 height: 32px;
             }
-            
+
             .strip-nav-btn {
                 width: 22px;
                 height: 22px;
                 font-size: 0.75rem;
             }
-            
+
             .strip-info {
                 font-size: 0.5rem;
             }
-            
-            .cta-section { 
+
+            .cta-section {
                 min-height: 280px;
                 padding: 14px;
                 gap: 14px;
             }
-            
+
             .cta-content h3 {
                 font-size: 1.3rem;
                 margin-bottom: 8px;
             }
-            
+
             .cta-content p {
                 font-size: 0.64rem;
                 line-height: 1.4;
                 margin-bottom: 8px;
             }
-            
+
             .action-item {
                 padding: 10px;
                 gap: 8px;
             }
-            
+
             .action-icon {
                 font-size: 1.1rem;
             }
-            
+
             .action-text {
                 font-size: 0.64rem;
             }
-            
+
             .action-text strong {
                 font-size: 0.7rem;
             }
-            
+
             .number-large {
                 font-size: 1.8rem;
                 margin-top: -8px;
             }
-            
+
             .theater-close {
                 width: 36px;
                 height: 36px;
                 font-size: 1.1rem;
             }
-            
+
             .theater-nav {
                 width: 36px;
                 height: 36px;
                 font-size: 1.2rem;
             }
-            
+
             .theater-fullscreen {
                 padding: 7px 12px;
                 font-size: 0.6rem;
             }
-            
+
             footer {
                 gap: 5px;
             }
@@ -1591,10 +1839,15 @@
         }
 
         @keyframes skeleton-loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
-        
+
         /* Screen reader only content */
         .sr-only {
             position: absolute;
@@ -1607,7 +1860,7 @@
             white-space: nowrap;
             border-width: 0;
         }
-        
+
         /* Skip to content link */
         .skip-link {
             position: absolute;
@@ -1621,12 +1874,13 @@
             z-index: 10000;
             transition: top 0.2s;
         }
-        
+
         .skip-link:focus {
             top: 0;
         }
     </style>
 </head>
+
 <body>
 
     <a href="#presentation-root" class="skip-link">Skip to main content</a>
@@ -1654,13 +1908,18 @@
                     <div class="crew-tag">COP 30: INDIGENOUS ACTION - MASSIVE ATTACK 2025 - COLLABORATIVE COVERAGE</div>
                     <h1 class="title-xl">THE<br>ANSWER<br>IS US<span style="color:var(--pink)">.</span></h1>
                 </div>
-                <div class="poster-frame" style="grid-column: span 5; grid-row: span 12; background-image: url('photos/IMG_8326.HEIC');">
+                <div class="poster-frame"
+                    style="grid-column: span 5; grid-row: span 12; background-image: url('photos/IMG_8326.HEIC');">
                     <div class="glitch-static"></div>
                 </div>
                 <div class="block block-dark" style="grid-column: span 4; grid-row: span 4;">
-                    <p style="font-size: 0.9rem; line-height: 1.2;"><br>.:Mobilizing:. <br><br>youth for COP30 actions <br> Indigenous Initiative + Massive Attack<br><br> Decentralized resistance <br> community-driven + network <br><br> .:DOC:. EG SOUTH AMERICA 12 YEARS OF ACTIVITY:.</p>
+                    <p style="font-size: 0.6rem; line-height: 1.2;"><br>youth for COP30 actions <br> Indigenous
+                        Initiative + Massive Attack<br><br> Decentralized resistance <br> community-driven + network
+                        <br><br> .:DOC:. EG SOUTH AMERICA 12 YEARS OF ACTIVITY:.
+                    </p>
                 </div>
-                <div class="block block-pink" style="grid-column: span 3; grid-row: span 4; text-align: center; justify-content: center;">
+                <div class="block block-pink"
+                    style="grid-column: span 3; grid-row: span 4; text-align: center; justify-content: center;">
                     <span style="font-weight: 800; font-size: 1.5rem;">Global<br>Climate March<br>2025</span>
                 </div>
             </section>
@@ -1668,102 +1927,127 @@
             <!-- SLIDE 2: COALITION WITH PROFILE PHOTOS & BADGES -->
             <section class="slide" aria-label="Slide 2: Team members">
                 <div class="block block-lime" style="grid-column: span 12; grid-row: span 2;">
-                    <h2 class="title-xl" style="font-size: 3rem; letter-spacing: -2px; text-align: center;">EARTH GUARDIANS SOUTH AMERICA TEAM</h2>
+                    <h2 class="title-xl" style="font-size: 4vh; letter-spacing: -2px; text-align: center;">EARTH
+                        GUARDIANS SOUTH AMERICA TEAM</h2>
                 </div>
-                
-                
-                
+
+
+
                 <!-- WALLACE -->
-                <div class="block block-white" data-href="https://www.instagram.com/wallk_555/" style="grid-column: span 4; grid-row: span 5;">
+                <div class="block block-white" data-href="https://www.instagram.com/wallk_555/"
+                    style="grid-column: span 4; grid-row: span 5;">
                     <div class="profile-photo-container">
                         <img src="photos/wallk.webp" alt="Wallace" class="profile-photo">
                     </div>
-                    <a href="badge-wallace.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Wallace's badge">
+                    <a href="badge-wallace.png" class="badge-link" target="_blank" rel="noopener noreferrer"
+                        title="View Badge" aria-label="View Wallace's badge">
                         <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW MEMBER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">WALLACE</h3>
-                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Young Black Artist & Cultural Producer. Musician, painter, actor. Creates multimedia content connecting art and environmental justice. Youth voice in the movement.</p>
+                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Young Black Artist & Cultural Producer.
+                        Musician, painter, actor. Creates multimedia content connecting art and environmental justice.
+                        Youth voice in the movement.</p>
                 </div>
-                
-                
-                
+
+
+
                 <!-- TUPÃ LEVI -->
-                <div class="block block-dark" data-href="https://drive.google.com/file/d/12gEq8pBwTrwAD_oZ4Fsu1xGF1pJuesYW/view?usp=sharing" style="grid-column: span 4; grid-row: span 5;">
+                <div class="block block-dark"
+                    data-href="https://drive.google.com/file/d/12gEq8pBwTrwAD_oZ4Fsu1xGF1pJuesYW/view?usp=sharing"
+                    style="grid-column: span 4; grid-row: span 5;">
                     <div class="profile-photo-container">
                         <img src="photos/tups.jpg" alt="Tupã" class="profile-photo">
                     </div>
-                    <a href="badge-tupa.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Tupã's badge">
+                    <a href="badge-tupa.png" class="badge-link" target="_blank" rel="noopener noreferrer"
+                        title="View Badge" aria-label="View Tupã's badge">
                         <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">RCC SOUTH AMERICA</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">TUPÃ LEVI</h3>
-                    <p style="font-size: 1rem; margin-top: 8px; color: #ffffff;">Regional Crew Councilor (South America). Born in Boca do Acre, AM. Artist, actor, musician, programmer. Technical documentation and audiovisual production lead.</p>
+                    <p style="font-size: 2vh; margin-top: 8px; color: #ffffff;">Regional Crew Councilor (South America).
+                        Born in Boca do Acre, AM. Artist, actor, musician, programmer. Technical documentation and
+                        audiovisual production lead.</p>
                 </div>
-                
-                                <!-- LEVI MOISÉS -->
-                                <div class="block block-pink" data-href="https://drive.google.com/file/d/1Q_zuwkFmySjFT4WpR6jcFiz8OE9uZR0A/view?usp=sharing" style="grid-column: span 4; grid-row: span 5;">
+
+                <!-- LEVI MOISÉS -->
+                <div class="block block-pink"
+                    data-href="https://drive.google.com/file/d/1Q_zuwkFmySjFT4WpR6jcFiz8OE9uZR0A/view?usp=sharing"
+                    style="grid-column: span 4; grid-row: span 5;">
                     <div class="profile-photo-container">
                         <img src="photos/levi.webp" alt="Levi Moisés" class="profile-photo">
                     </div>
-                    <a href="badge.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Levi's badge">
+                    <a href="badge.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge"
+                        aria-label="View Levi's badge">
                         <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW WISDOM ADVISER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">LEVI KARMADRUM</h3>
-                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Cultural Activist, music professor, writer, director. Strategic planning and funding development.</p>
+                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Cultural Activist, music professor,
+                        writer, director. Strategic planning and funding development.</p>
                 </div>
-                                <!-- ISADORA -->
-                                <div class="block block-white" data-href="https://drive.google.com/file/d/1ZCc26SisUZvi4ngli4ugGMAXGY3pVkkw/view?usp=sharing" style="grid-column: span 6; grid-row: span 5;">
+                <!-- ISADORA -->
+                <div class="block block-white"
+                    data-href="https://drive.google.com/file/d/1ZCc26SisUZvi4ngli4ugGMAXGY3pVkkw/view?usp=sharing"
+                    style="grid-column: span 6; grid-row: span 5;">
                     <div class="profile-photo-container">
                         <img src="photos/isa.jpg" alt="Isadora" class="profile-photo">
                     </div>
-                    <a href="badge-isadora.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Isadora's badge">
+                    <a href="badge-isadora.png" class="badge-link" target="_blank" rel="noopener noreferrer"
+                        title="View Badge" aria-label="View Isadora's badge">
                         <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW LEADER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">ISADORA</h3>
-                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Multidisciplinary Artist & Scientist. Actress, dancer, professor, biologist. Integrates scientific knowledge with artistic expression. Bridges academia and grassroots activism.</p>
+                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Multidisciplinary Artist & Scientist.
+                        Actress, dancer, professor, biologist. Integrates scientific knowledge with artistic expression.
+                        Bridges academia and grassroots activism.</p>
                 </div>
 
-                                <!-- (NANCI) -->
-                                <div class="block block-pink" data-href="https://ditaferreira.github.io/dita-website/" style="grid-column: span 6; grid-row: span 5;">
+                <!-- (NANCI) -->
+                <div class="block block-pink" data-href="https://ditaferreira.github.io/dita-website/"
+                    style="grid-column: span 6; grid-row: span 5;">
                     <div class="profile-photo-container">
                         <img src="photos/dita.webp" alt="Nanci" class="profile-photo">
                     </div>
-                    <a href="badge-nanci.png" class="badge-link" target="_blank" rel="noopener noreferrer" title="View Badge" aria-label="View Nanci's badge">
+                    <a href="badge-nanci.png" class="badge-link" target="_blank" rel="noopener noreferrer"
+                        title="View Badge" aria-label="View Nanci's badge">
                         <img src="badge.png" alt="Earth Guardians Badge" class="badge-icon">
                     </a>
                     <div class="crew-tag">CREW WISDOM ADVISER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">NANCI FERREIRA</h3>
-                    <p style="font-size: 1rem; margin-top: 8px; color: #050505;">Cultural Leadership. Bridge between ancestral Black wisdom traditions and contemporary environmental activism. Advisor on cultural protocols and ancestral practices.</p>
+                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Cultural Leadership. Bridge between
+                        ancestral Black wisdom traditions and contemporary environmental activism. Advisor on cultural
+                        protocols and ancestral practices.</p>
                 </div>
             </section>
 
             <!-- SLIDE 3: MEDIA GALLERY -->
             <section class="slide" aria-label="Slide 3: Media gallery">
-                    <div class="poster-frame" style="grid-column: span 8; grid-row: span 12;">
-                        <div class="gallery" id="media-gallery" role="list" aria-label="Photo gallery"></div>
-                        <div class="thumb-strip-container">
-                            <button class="strip-nav-btn" id="strip-prev" aria-label="Scroll thumbnails left">◀</button>
-                            <div class="thumb-strip" id="thumb-strip" role="list" aria-label="Image thumbnails"></div>
-                            <button class="strip-nav-btn" id="strip-next" aria-label="Scroll thumbnails right">▶</button>
-                            <span class="strip-info" id="strip-info" aria-live="polite">0 / 0</span>
-                        </div>
-
-                        <div class="block block-pink" style="position: absolute; bottom: 85px; right: -20px; width: 300px;">
-                            <h3 style="font-family: 'Archivo Black'">SOUTH AMERICA DOC</h3>
-                            <p style="font-size: 0.7rem"> YOUTH PRODUCTION - RESISTENCE<br> AMERICA LATIN MUSEU - CLIMATE MARCH</p>
-                        </div>
+                <div class="poster-frame" style="grid-column: span 8; grid-row: span 12;">
+                    <div class="gallery" id="media-gallery" role="list" aria-label="Photo gallery"></div>
+                    <div class="thumb-strip-container">
+                        <button class="strip-nav-btn" id="strip-prev" aria-label="Scroll thumbnails left">◀</button>
+                        <div class="thumb-strip" id="thumb-strip" role="list" aria-label="Image thumbnails"></div>
+                        <button class="strip-nav-btn" id="strip-next" aria-label="Scroll thumbnails right">▶</button>
+                        <span class="strip-info" id="strip-info" aria-live="polite">0 / 0</span>
                     </div>
+
+                    <div class="block block-pink" style="position: absolute; bottom: 85px; right: -20px; width: 300px;">
+                        <h3 style="font-family: 'Archivo Black'">SOUTH AMERICA DOC</h3>
+                        <p style="font-size: 0.7rem"> YOUTH PRODUCTION - RESISTENCE<br> AMERICA LATIN MUSEU - CLIMATE
+                            MARCH</p>
+                    </div>
+                </div>
                 <div class="block block-dark" style="grid-column: span 4; grid-row: span 4;">
                     <div class="crew-tag">INTERNATIONAL_NETWORK_COMPASSION</div>
-                    <p>Capturing the truth of the 2025 São Paulo COP 30 action with Indigenous Leadership + MASSIVE ATTACK COLECTIVE Worldwide Famous support .</p>
+                    <p>Capturing the truth of the 2025 São Paulo COP 30 action with Indigenous Leadership + MASSIVE
+                        ATTACK COLECTIVE Worldwide Famous support .</p>
                 </div>
                 <div class="block block-lime" style="grid-column: span 4; grid-row: span 8;">
                     <div class="number-large">Footages and Resources</div>
-                    <p style="font-weight: bold">GALLERY OF FOOTAGES <br><br> NETWORK OF CONNECTIONS  </p>
-                    <div style="margin-top: 20px; border-top: 2px solid black; padding-top: 10px; font-size: 0.8rem;">
+                    <p style="font-weight: bold">GALLERY OF FOOTAGES <br><br> NETWORK OF CONNECTIONS </p>
+                    <div style="margin-top: 20px; border-top: 2px solid black; padding-top: 10px; font-size: 1vh;">
                         > MORE THAN 4.000 PEOPLE INDIRECTLY REACHED<br>
                         > INTERNATIONAL NETWORK - PARTNERS - COP 30 BRAZIK ENVIRONMENT<br>
                         > CLIMATE CRISE DIRECT ACTION - ODS ALIGNED - ARTISTIC AUDIOVISUAL FRONT
@@ -1777,99 +2061,146 @@
                     <h2>OUR DEMANDS</h2>
                     <p class="subtitle">Climate Justice Now - Youth-Led Action for COP30</p>
                 </div>
-                
+
                 <div class="demand-card demand-1">
                     <span class="demand-number">01</span>
                     <span class="demand-icon">🌍</span>
                     <h3>Indigenous Land Rights</h3>
-                    <p>Immediate recognition and protection of indigenous territories. Stop deforestation and land grabbing. Respect ancestral knowledge and sovereignty.</p>
+                    <p>Immediate recognition and protection of indigenous territories. Stop deforestation and land
+                        grabbing. Respect ancestral knowledge and sovereignty.</p>
                 </div>
-                
+
                 <div class="demand-card demand-2">
                     <span class="demand-number">02</span>
                     <span class="demand-icon">💧</span>
                     <h3>Water Protection</h3>
-                    <p>Clean water access for all communities. End corporate pollution of rivers and aquifers. Protect water sources from extractive industries.</p>
+                    <p>Clean water access for all communities. End corporate pollution of rivers and aquifers. Protect
+                        water sources from extractive industries.</p>
                 </div>
-                
+
                 <div class="demand-card demand-3">
                     <span class="demand-number">03</span>
                     <span class="demand-icon">⚡</span>
                     <h3>Renewable Energy Transition</h3>
-                    <p>100% renewable energy by 2030. End fossil fuel subsidies. Just transition for workers and communities. Community-owned energy systems.</p>
+                    <p>100% renewable energy by 2030. End fossil fuel subsidies. Just transition for workers and
+                        communities. Community-owned energy systems.</p>
                 </div>
-                
+
                 <div class="demand-card demand-4">
                     <span class="demand-number">04</span>
                     <span class="demand-icon">🎓</span>
                     <h3>Climate Education</h3>
-                    <p>Mandatory climate education in all schools. Youth participation in climate policy. Fund environmental literacy programs nationwide.</p>
+                    <p>Mandatory climate education in all schools. Youth participation in climate policy. Fund
+                        environmental literacy programs nationwide.</p>
                 </div>
-                
+
                 <div class="demand-card demand-5">
                     <span class="demand-number">05</span>
                     <span class="demand-icon">⚖️</span>
                     <h3>Climate Justice</h3>
-                    <p>Hold polluters accountable. Reparations for climate damage. Support frontline communities. End environmental racism.</p>
+                    <p>Hold polluters accountable. Reparations for climate damage. Support frontline communities. End
+                        environmental racism.</p>
                 </div>
-                
+
                 <div class="demand-card demand-6">
                     <span class="demand-number">06</span>
                     <span class="demand-icon">🤝</span>
                     <h3>Youth Leadership</h3>
-                    <p>Youth representation in all climate negotiations. Fund youth-led initiatives. Amplify young voices in decision-making processes.</p>
+                    <p>Youth representation in all climate negotiations. Fund youth-led initiatives. Amplify young
+                        voices in decision-making processes.</p>
                 </div>
-                
+
                 <div class="hashtag-banner">
-                    #CLIMATEJUSTICENOW #COP30 #EARTHGUARDIANS
+                    #CLIMATEJUSTICENOW #COP30 #EARTHGUARDIANS #THEANSWERISUS #ARESPOSTASOMOSNOS #CHOOSEACTIONNOW!
                 </div>
             </section>
 
             <!-- SLIDE 5: BUDGET -->
             <section class="slide" aria-label="Slide 5: Budget breakdown">
-                <div class="block block-lime" style="grid-column: span 12; grid-row: span 2;">
-                    <h2 class="title-xl" style="font-size: 3rem; letter-spacing: -2px; text-align: center;">PROJECT BUDGET</h2>
+                <div class="block block-lime"
+                    style="grid-column: span 12; grid-row: span 2; display: flex; align-items: center; justify-content: center; padding: 1vh;">
+                    <h2 class="title-xl" style="font-size: clamp(1.5rem, 5vh, 4rem); letter-spacing: -2px; margin: 0;">
+                        PROJECT BUDGET</h2>
                 </div>
 
-                <div class="block block-dark" style="grid-column: span 4; grid-row: span 5;">
-                    <span class="demand-icon">🚗</span>
-                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">TRANSPORTATION</h3>
-                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Coverage for 5 team members: RCC, Crew Leader, Crew Member, and 2x Wisdom Advisers. Ground transport to event locations and documentation sites.</p>
+                <div class="block block-dark"
+                    style="grid-column: span 4; grid-row: span 4; padding: 1.5vh; display: flex; flex-direction: column; justify-content: center;">
+                    <span class="demand-icon"
+                        style="font-size: clamp(2rem, 4.5vh, 3.5rem); margin-bottom: 1vh;">🚗</span>
+                    <h3
+                        style="font-family: 'Archivo Black'; font-size: clamp(0.7rem, 2vh, 1.2rem); margin: 0 0 0.5vh 0;">
+                        TRANSPORTATION</h3>
+                    <p style="font-size: clamp(0.6rem, 1.4vh, 0.9rem); line-height: 1.35; margin: 0;">Coverage for 5
+                        team members: RCC, Crew Leader, Crew Member, and Two Wisdom Advisers. Ground transport to event
+                        locations and documentation sites.</p>
                 </div>
 
-                <div class="block block-pink" style="grid-column: span 4; grid-row: span 5;">
-                    <span class="demand-icon">🏠</span>
-                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px; color: white;">ACCOMMODATION</h3>
-                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5; color: white;">Lodging for the full team during COP30 coverage period. Strategic location for rapid response to climate actions.</p>
+                <div class="block block-pink"
+                    style="grid-column: span 4; grid-row: span 4; padding: 1.5vh; display: flex; flex-direction: column; justify-content: center;">
+                    <span class="demand-icon"
+                        style="font-size: clamp(2rem, 4.5vh, 3.5rem); margin-bottom: 1vh;">🏠</span>
+                    <h3
+                        style="font-family: 'Archivo Black'; font-size: clamp(0.7rem, 2vh, 1.2rem); margin: 0 0 0.5vh 0; color: white;">
+                        ACCOMMODATION</h3>
+                    <p style="font-size: clamp(0.6rem, 1.4vh, 0.9rem); line-height: 1.35; margin: 0; color: white;">
+                        Lodging for the full team during COP30 coverage period. Strategic location for rapid response to
+                        climate actions.</p>
                 </div>
 
-                <div class="block block-white" style="grid-column: span 4; grid-row: span 5;">
-                    <span class="demand-icon">🍽️</span>
-                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">MEALS</h3>
-                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Daily sustenance for 5 crew members throughout the documentation period. Essential for maintaining team energy during intensive coverage.</p>
+                <div class="block block-white"
+                    style="grid-column: span 4; grid-row: span 4; padding: 1.5vh; display: flex; flex-direction: column; justify-content: center;">
+                    <span class="demand-icon"
+                        style="font-size: clamp(2rem, 4.5vh, 3.5rem); margin-bottom: 1vh;">🍽️</span>
+                    <h3
+                        style="font-family: 'Archivo Black'; font-size: clamp(0.7rem, 2vh, 1.2rem); margin: 0 0 0.5vh 0;">
+                        MEALS</h3>
+                    <p style="font-size: clamp(0.6rem, 1.4vh, 0.9rem); line-height: 1.35; margin: 0;">Daily sustenance
+                        for 5 crew members throughout the documentation period. Essential for maintaining team energy
+                        during intensive coverage.</p>
                 </div>
 
-                <div class="block block-lime" style="grid-column: span 6; grid-row: span 5;">
-                    <span class="demand-icon">📡</span>
-                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">COMMUNICATION & OUTREACH</h3>
-                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Internet connectivity, mobile data, social media promotion, press materials, and digital outreach tools. Ensuring real-time documentation and global reach of climate action coverage.</p>
+                <div class="block block-lime"
+                    style="grid-column: span 6; grid-row: span 4; padding: 1.5vh; display: flex; flex-direction: column; justify-content: center;">
+                    <span class="demand-icon"
+                        style="font-size: clamp(2rem, 4.5vh, 3.5rem); margin-bottom: 1vh;">📡</span>
+                    <h3
+                        style="font-family: 'Archivo Black'; font-size: clamp(0.7rem, 2vh, 1.2rem); margin: 0 0 0.5vh 0;">
+                        COMMUNICATION & OUTREACH</h3>
+                    <p style="font-size: clamp(0.6rem, 1.4vh, 0.9rem); line-height: 1.35; margin: 0;">Internet
+                        connectivity, mobile data, social media promotion, press materials, and digital outreach tools.
+                        Ensuring real-time documentation and global reach of climate action coverage.</p>
                 </div>
 
-                <div class="block block-dark" style="grid-column: span 6; grid-row: span 5;">
-                    <span class="demand-icon">🎫</span>
-                    <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem; margin-top: 10px;">TICKETS & ACCREDITATION</h3>
-                    <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.5;">Official event access, press credentials, and necessary permits for comprehensive COP30 documentation and Indigenous Initiative + Massive Attack coverage.</p>
+                <div class="block block-dark"
+                    style="grid-column: span 6; grid-row: span 4; padding: 1.5vh; display: flex; flex-direction: column; justify-content: center;">
+                    <span class="demand-icon"
+                        style="font-size: clamp(2rem, 4.5vh, 3.5rem); margin-bottom: 1vh;">🎫</span>
+                    <h3
+                        style="font-family: 'Archivo Black'; font-size: clamp(0.7rem, 2vh, 1.2rem); margin: 0 0 0.5vh 0;">
+                        TICKETS & ACCREDITATION</h3>
+                    <p style="font-size: clamp(0.6rem, 1.4vh, 0.9rem); line-height: 1.35; margin: 0;">Official event
+                        access, press credentials, and necessary permits for comprehensive COP30 documentation and
+                        Indigenous Initiative + Massive Attack coverage.</p>
                 </div>
 
-                <div class="block block-pink" style="grid-column: span 12; grid-row: span 3; display: flex; align-items: center; justify-content: space-between;">
-                    <div>
-                        <h3 style="font-family: 'Syne'; font-size: 2.5rem; color: white; margin: 0;">TOTAL BUDGET: $500 USD</h3>
-                        <p style="font-size: 0.9rem; margin-top: 10px; color: white;">Grassroots funding for youth-led climate documentation</p>
+                <div class="block block-pink"
+                    style="grid-column: span 12; grid-row: span 2; display: flex; align-items: center; justify-content: space-between; padding: 0 3vh;">
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <h3
+                            style="font-family: 'Syne'; font-size: clamp(1.8rem, 5vh, 4rem); color: white; margin: 0; line-height: 1; white-space: nowrap;">
+                            TOTAL: $500 USD</h3>
+                        <p
+                            style="font-size: clamp(0.6rem, 1.4vh, 0.9rem); margin: 0.5vh 0 0 0; color: white; opacity: 0.9;">
+                            Grassroots funding for youth-led climate documentation</p>
                     </div>
-                    <a href="https://drive.google.com/file/d/1-g2iwmRo50DlIYHG88KgasDiqpHok9VP/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="background: white; color: var(--pink); padding: 20px 40px; font-family: 'Archivo Black'; font-size: 1.2rem; text-decoration: none; border: 3px solid white; transition: 0.3s;" onmouseover="this.style.background='var(--lime)'; this.style.color='var(--obsidian)'" onmouseout="this.style.background='white'; this.style.color='var(--pink)'">VIEW FULL PROJECT PDF</a>
+                    <a href="https://drive.google.com/file/d/1-g2iwmRo50DlIYHG88KgasDiqpHok9VP/view?usp=sharing"
+                        target="_blank" rel="noopener noreferrer"
+                        style="background: white; color: var(--pink); padding: 1.5vh 3vh; font-family: 'Archivo Black'; font-size: clamp(0.7rem, 1.8vh, 1.1rem); text-decoration: none; border: 3px solid white; transition: 0.3s; white-space: nowrap; margin-left: 2vh;"
+                        onmouseover="this.style.background='var(--lime)'; this.style.color='var(--obsidian)'"
+                        onmouseout="this.style.background='white'; this.style.color='var(--pink)'">VIEW FULL PDF</a>
                 </div>
             </section>
-            
+
         </main>
 
         <footer>
@@ -1903,7 +2234,7 @@
         function changeSlide(dir) {
             currentIdx = (currentIdx + dir + slides.length) % slides.length;
             updateUI();
-            
+
             // Announce slide change for screen readers
             const announcement = document.createElement('div');
             announcement.setAttribute('role', 'status');
@@ -1960,20 +2291,20 @@
         updateUI();
 
         // Make profile blocks clickable while preserving inner links (badges)
-        (function bindProfileCardLinks(){
+        (function bindProfileCardLinks() {
             const cardSelector = '.block[data-href]';
             document.querySelectorAll(cardSelector).forEach(card => {
                 card.classList.add('clickable');
                 card.setAttribute('role', 'link');
                 card.setAttribute('tabindex', '0');
-                
+
                 const handleActivation = (ev) => {
                     if (ev.target.closest('a')) return;
                     const url = card.getAttribute('data-href');
                     if (!url) return;
                     window.open(url, '_blank', 'noopener,noreferrer');
                 };
-                
+
                 card.addEventListener('click', handleActivation);
                 card.addEventListener('keydown', (ev) => {
                     if (ev.key === 'Enter' || ev.key === ' ') {
@@ -1985,7 +2316,7 @@
         })();
 
         // ===== HIGH PERFORMANCE GRID GALLERY =====
-        (function(){
+        (function () {
             const gallery = document.getElementById('media-gallery');
             const thumbStrip = document.getElementById('thumb-strip');
             const stripInfo = document.getElementById('strip-info');
@@ -1994,13 +2325,13 @@
             if (!gallery) return;
 
             const images = [
-                'photos/dita.webp','photos/isa.jpg','photos/levi.webp',
-                'photos/tups.jpg','photos/wallk.webp',
-                'photos/IMG_20251113_194613.jpg','photos/IMG_20251113_232511.jpg',
-                'photos/IMG_20251114_125617.jpg','photos/IMG_20251114_142934.jpg',
-                'photos/IMG_20251114_202847_4.jpg','photos/IMG_8267.jpg',
-                'photos/IMG_8422-compressed.jpg','photos/IMG_8445.JPG',
-                'photos/IMG_8458-compressed.jpg','photos/IMG_8464.jpg',
+                'photos/dita.webp', 'photos/isa.jpg', 'photos/levi.webp',
+                'photos/tups.jpg', 'photos/wallk.webp',
+                'photos/IMG_20251113_194613.jpg', 'photos/IMG_20251113_232511.jpg',
+                'photos/IMG_20251114_125617.jpg', 'photos/IMG_20251114_142934.jpg',
+                'photos/IMG_20251114_202847_4.jpg', 'photos/IMG_8267.jpg',
+                'photos/IMG_8422-compressed.jpg', 'photos/IMG_8445.JPG',
+                'photos/IMG_8458-compressed.jpg', 'photos/IMG_8464.jpg',
                 'photos/IMG_8503-compressed-compressed.png',
                 'photos/vlcsnap-2025-11-16-02h26m12s650.png',
                 'photos/vlcsnap-2025-11-16-02h29m54s537.png'
@@ -2015,9 +2346,9 @@
                 if (cache.has(src)) return Promise.resolve(cache.get(src));
                 return new Promise((resolve) => {
                     const img = new Image();
-                    img.onload = () => { 
-                        cache.set(src, img); 
-                        resolve(img); 
+                    img.onload = () => {
+                        cache.set(src, img);
+                        resolve(img);
                     };
                     img.onerror = () => {
                         console.warn(`Failed to load image: ${src}`);
@@ -2037,7 +2368,7 @@
                     item.className = 'gallery-item' + (i % 7 === 0 ? ' featured' : '');
                     item.setAttribute('role', 'listitem');
                     item.dataset.index = i;
-                    
+
                     const img = document.createElement('img');
                     img.dataset.src = images[i];
                     img.alt = `Climate action documentation image ${i + 1}`;
@@ -2079,18 +2410,18 @@
                     icon.setAttribute('role', 'listitem');
                     icon.setAttribute('tabindex', '0');
                     icon.setAttribute('aria-label', `View image ${i + 1}`);
-                    
+
                     const img = document.createElement('img');
                     img.src = src;
                     img.alt = '';
                     img.loading = 'lazy';
                     icon.appendChild(img);
-                    
+
                     const handleClick = () => {
                         const items = gallery.querySelectorAll('.gallery-item');
                         if (items[i]) items[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
                     };
-                    
+
                     icon.onclick = handleClick;
                     icon.onkeydown = (e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -2098,7 +2429,7 @@
                             handleClick();
                         }
                     };
-                    
+
                     fragment.appendChild(icon);
                 });
                 thumbStrip.appendChild(fragment);
@@ -2223,4 +2554,5 @@
         })();
     </script>
 </body>
+
 </html>
