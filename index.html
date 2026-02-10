@@ -88,8 +88,8 @@
             display: grid;
             grid-template-rows: auto 1fr auto;
             height: 100vh;
-            padding: 20px;
-            gap: 20px;
+            padding: 14px 20px;
+            gap: 14px;
             contain: layout style;
         }
 
@@ -97,24 +97,44 @@
         header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            padding-top: 10px;
+            align-items: center;
+            padding: 4px 0 2px;
             z-index: 1;
             contain: layout style;
+            gap: 10px;
+            max-height: 48px;
+            flex-wrap: nowrap;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .logo {
             font-family: 'Syne', sans-serif;
-            font-size: 2.5rem;
-            line-height: 0.8;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            line-height: 0.85;
             color: var(--lime);
-            text-shadow: 3px 3px 0px var(--pink);
+            text-shadow: 2px 2px 0px var(--pink);
+            white-space: nowrap;
+        }
+
+        .logo-sub {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(0.7rem, 1.4vw, 1.1rem);
+            line-height: 1;
+            color: var(--lime);
+            text-shadow: 2px 2px 0px var(--pink);
+            margin-top: 4px;
         }
 
         .system-specs {
             text-align: right;
-            font-size: 0.65rem;
-            line-height: 1.4;
+            font-size: clamp(0.45rem, 0.7vw, 0.6rem);
+            line-height: 1.35;
             letter-spacing: 1px;
             color: rgba(232, 232, 232, 0.6);
         }
@@ -839,13 +859,12 @@
 
         .demand-card h3 {
             font-family: 'Archivo Black', sans-serif;
-            font-size: 2vh;
+            font-size: clamp(0.8rem, 1.5vw, 1.1rem);
             margin-bottom: 12px;
             line-height: 1.2;
             color: #ffffff;
             z-index: 10;
             position: relative;
-
         }
 
         .demand-card p {
@@ -984,15 +1003,7 @@
             line-height: 1.6;
         }
 
-        @media (max-width: 900px) {
-            .demand-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .demands-hero .hero-text p {
-                max-width: 100%;
-            }
-        }
+        /* demand-grid responsive rule merged into main 900px breakpoint below */
 
         /* CTA Section */
         .cta-section {
@@ -1075,7 +1086,7 @@
             justify-content: center;
             align-items: center;
             font-family: 'Archivo Black', sans-serif;
-            font-size: 2.5vh;
+            font-size: clamp(0.8rem, 2vw, 1.4rem);
             letter-spacing: 3px;
         }
 
@@ -1091,13 +1102,33 @@
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
-                gap: 8px;
+                gap: 4px;
                 padding-top: 0;
+                max-height: none;
+            }
+
+            .header-brand {
+                flex-direction: column;
+                align-items: center;
+                gap: 2px;
             }
 
             .logo {
                 font-size: 1.5rem;
                 line-height: 0.85;
+            }
+
+            .logo-sub {
+                font-size: 0.8rem;
+                margin-top: 2px;
+            }
+
+            .demand-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demands-hero .hero-text p {
+                max-width: 100%;
             }
 
             .system-specs {
@@ -1384,6 +1415,42 @@
                 width: 32px;
                 height: 32px;
             }
+
+            /* Budget section mobile */
+            .budget-card {
+                padding: 14px !important;
+            }
+
+            .budget-card h3 {
+                font-size: 0.85rem !important;
+                margin-bottom: 6px !important;
+            }
+
+
+
+            .budget-card .demand-icon {
+                font-size: 1.4rem !important;
+            }
+
+            .budget-total {
+                padding: 14px !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: left;
+            }
+
+            .budget-total h3 {
+                font-size: 1.5rem !important;
+            }
+
+            .budget-total p {
+                font-size: 0.65rem !important;
+            }
+
+            .budget-total a {
+                align-self: stretch;
+                text-align: center;
+            }
         }
 
         @media (max-width: 600px) {
@@ -1408,6 +1475,11 @@
             .logo {
                 font-size: 1.3rem;
                 line-height: 0.88;
+            }
+
+            .logo-sub {
+                font-size: 0.65rem;
+                margin-top: 1px;
             }
 
             .system-specs {
@@ -1635,6 +1707,31 @@
                 padding: 0;
                 gap: 6px;
             }
+
+            /* Budget section small mobile */
+            .budget-card {
+                padding: 12px !important;
+            }
+
+            .budget-card h3 {
+                font-size: 0.75rem !important;
+            }
+
+            .budget-card p {
+                font-size: 0.65rem !important;
+            }
+
+            .budget-card .demand-icon {
+                font-size: 1.2rem !important;
+            }
+
+            .budget-total h3 {
+                font-size: 1.3rem !important;
+            }
+
+            .budget-total p {
+                font-size: 0.6rem !important;
+            }
         }
 
         @media (max-width: 400px) {
@@ -1647,6 +1744,11 @@
             .logo {
                 font-size: 1.1rem;
                 line-height: 0.9;
+            }
+
+            .logo-sub {
+                font-size: 0.55rem;
+                margin-top: 1px;
             }
 
             .system-specs {
@@ -1875,6 +1977,43 @@
             transition: top 0.2s;
         }
 
+        /* Large screen optimization */
+        @media (min-width: 1400px) {
+            .app-container {
+                padding: 18px 28px;
+                gap: 16px;
+            }
+
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            .logo-sub {
+                font-size: 1.1rem;
+            }
+
+            .system-specs {
+                font-size: 0.62rem;
+            }
+
+            .slide {
+                gap: 18px;
+            }
+
+            .block {
+                padding: 24px;
+            }
+
+            .gallery {
+                grid-auto-rows: 240px;
+            }
+
+            .nav-trigger {
+                padding: 16px 44px;
+                font-size: 1.3rem;
+            }
+        }
+
         .skip-link:focus {
             top: 0;
         }
@@ -1890,8 +2029,10 @@
 
     <div class="app-container">
         <header>
-            <div class="logo">EARTH<br>GUARDIANS</div>
-            <div class="logo" style="margin-top: 1vh;">.:EG SOUTH AMERICA:. </div>
+            <div class="header-brand">
+                <div class="logo">EARTH GUARDIANS</div>
+                <div class="logo-sub">.:EG SOUTH AMERICA:.</div>
+            </div>
 
             <div class="system-specs">
                 CLIMATE MARCH<br>
@@ -1927,7 +2068,8 @@
             <!-- SLIDE 2: COALITION WITH PROFILE PHOTOS & BADGES -->
             <section class="slide" aria-label="Slide 2: Team members">
                 <div class="block block-lime" style="grid-column: span 12; grid-row: span 2;">
-                    <h2 class="title-xl" style="font-size: 4vh; letter-spacing: -2px; text-align: center;">EARTH
+                    <h2 class="title-xl"
+                        style="font-size: clamp(1.5rem, 3vw, 2.5rem); letter-spacing: -2px; text-align: center;">EARTH
                         GUARDIANS SOUTH AMERICA TEAM</h2>
                 </div>
 
@@ -1945,7 +2087,8 @@
                     </a>
                     <div class="crew-tag">CREW MEMBER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">WALLACE</h3>
-                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Young Black Artist & Cultural Producer.
+                    <p style="font-size: 0.75rem; margin-top: 8px; color: #050505;">Young Black Artist & Cultural
+                        Producer.
                         Musician, painter, actor. Creates multimedia content connecting art and environmental justice.
                         Youth voice in the movement.</p>
                 </div>
@@ -1965,7 +2108,8 @@
                     </a>
                     <div class="crew-tag">RCC SOUTH AMERICA</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">TUPÃ LEVI</h3>
-                    <p style="font-size: 2vh; margin-top: 8px; color: #ffffff;">Regional Crew Councilor (South America).
+                    <p style="font-size: 0.75rem; margin-top: 8px; color: #ffffff;">Regional Crew Councilor (South
+                        America).
                         Born in Boca do Acre, AM. Artist, actor, musician, programmer. Technical documentation and
                         audiovisual production lead.</p>
                 </div>
@@ -1983,7 +2127,7 @@
                     </a>
                     <div class="crew-tag">CREW WISDOM ADVISER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">LEVI KARMADRUM</h3>
-                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Cultural Activist, music professor,
+                    <p style="font-size: 0.75rem; margin-top: 8px; color: #050505;">Cultural Activist, music professor,
                         writer, director. Strategic planning and funding development.</p>
                 </div>
                 <!-- ISADORA -->
@@ -1999,7 +2143,8 @@
                     </a>
                     <div class="crew-tag">CREW LEADER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">ISADORA</h3>
-                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Multidisciplinary Artist & Scientist.
+                    <p style="font-size: 0.75rem; margin-top: 8px; color: #050505;">Multidisciplinary Artist &
+                        Scientist.
                         Actress, dancer, professor, biologist. Integrates scientific knowledge with artistic expression.
                         Bridges academia and grassroots activism.</p>
                 </div>
@@ -2016,7 +2161,7 @@
                     </a>
                     <div class="crew-tag">CREW WISDOM ADVISER</div>
                     <h3 style="font-family: 'Archivo Black'; font-size: 1.2rem;">NANCI FERREIRA</h3>
-                    <p style="font-size: 2vh; margin-top: 8px; color: #050505;">Cultural Leadership. Bridge between
+                    <p style="font-size: 0.75rem; margin-top: 8px; color: #050505;">Cultural Leadership. Bridge between
                         ancestral Black wisdom traditions and contemporary environmental activism. Advisor on cultural
                         protocols and ancestral practices.</p>
                 </div>
@@ -2118,84 +2263,76 @@
             <!-- SLIDE 5: BUDGET -->
             <section class="slide" aria-label="Slide 5: Budget breakdown">
                 <div class="block block-lime"
-                    style="grid-column: span 12; grid-row: span 2; display: flex; align-items: center; justify-content: center; padding: 1vh;">
-                    <h2 class="title-xl" style="font-size: clamp(1.5rem, 5vh, 4rem); letter-spacing: -2px; margin: 0;">
+                    style="grid-column: span 12; grid-row: span 2; display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <h2 class="title-xl"
+                        style="font-size: clamp(1.3rem, 3.5vw, 3rem); letter-spacing: -2px; margin: 0;">
                         PROJECT BUDGET</h2>
                 </div>
 
-                <div class="block block-dark"
-                    style="grid-column: span 4; grid-row: span 3; padding: 1.2vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
-                    <span class="demand-icon"
-                        style="font-size: clamp(1.2rem, 3vh, 2.5rem); margin-bottom: 0.5vh;">🚗</span>
-                    <h3
-                        style="font-family: 'Archivo Black'; font-size: clamp(0.65rem, 1.8vh, 1.1rem); margin: 0 0 0.3vh 0;">
+                <div class="block block-dark budget-card"
+                    style="grid-column: span 4; grid-row: span 3; padding: 12px; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+                    <span class="demand-icon" style="font-size: clamp(1rem, 2vw, 2rem); margin-bottom: 4px;">🚗</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: clamp(0.6rem, 1.2vw, 1rem); margin: 0 0 4px 0;">
                         TRANSPORTATION</h3>
-                    <p style="font-size: clamp(0.55rem, 1.2vh, 0.85rem); line-height: 1.3; margin: 0;">Coverage for 5
+                    <p style="font-size: clamp(0.3rem, 0.7vw, 0.6rem); line-height: 1.3; margin: 0;">Coverage for 5
                         team members: RCC, Crew Leader, Crew Member, and Two Wisdom Advisers. Ground transport to event
                         locations and documentation sites.</p>
                 </div>
 
-                <div class="block block-pink"
-                    style="grid-column: span 4; grid-row: span 3; padding: 1.2vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
-                    <span class="demand-icon"
-                        style="font-size: clamp(1.2rem, 3vh, 2.5rem); margin-bottom: 0.5vh;">🏠</span>
+                <div class="block block-pink budget-card"
+                    style="grid-column: span 4; grid-row: span 3; padding: 12px; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+                    <span class="demand-icon" style="font-size: clamp(1rem, 2vw, 2rem); margin-bottom: 4px;">🏠</span>
                     <h3
-                        style="font-family: 'Archivo Black'; font-size: clamp(0.65rem, 1.8vh, 1.1rem); margin: 0 0 0.3vh 0; color: white;">
+                        style="font-family: 'Archivo Black'; font-size: clamp(0.6rem, 1.2vw, 1rem); margin: 0 0 4px 0; color: white;">
                         ACCOMMODATION</h3>
-                    <p style="font-size: clamp(0.55rem, 1.2vh, 0.85rem); line-height: 1.3; margin: 0; color: white;">
+                    <p style="font-size: clamp(0.3rem, 0.7vw, 0.6rem); line-height: 1.3; margin: 0; color: white;">
                         Lodging for the full team during COP30 coverage period. Strategic location for rapid response to
                         climate actions.</p>
                 </div>
 
-                <div class="block block-white"
-                    style="grid-column: span 4; grid-row: span 3; padding: 1.2vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
-                    <span class="demand-icon"
-                        style="font-size: clamp(1.2rem, 3vh, 2.5rem); margin-bottom: 0.5vh;">🍽️</span>
-                    <h3
-                        style="font-family: 'Archivo Black'; font-size: clamp(0.65rem, 1.8vh, 1.1rem); margin: 0 0 0.3vh 0;">
+                <div class="block block-white budget-card"
+                    style="grid-column: span 4; grid-row: span 3; padding: 12px; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+                    <span class="demand-icon" style="font-size: clamp(1rem, 2vw, 2rem); margin-bottom: 4px;">🍽️</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: clamp(0.6rem, 1.2vw, 1rem); margin: 0 0 4px 0;">
                         MEALS</h3>
-                    <p style="font-size: clamp(0.55rem, 1.2vh, 0.85rem); line-height: 1.3; margin: 0;">Daily sustenance
+                    <p style="font-size: clamp(0.3rem, 0.7vw, 0.6rem); line-height: 1.3; margin: 0;">Daily sustenance
                         for 5 crew members throughout the documentation period. Essential for maintaining team energy
                         during intensive coverage.</p>
                 </div>
 
-                <div class="block block-lime"
-                    style="grid-column: span 6; grid-row: span 3; padding: 1.2vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
-                    <span class="demand-icon"
-                        style="font-size: clamp(1.2rem, 3vh, 2.5rem); margin-bottom: 0.5vh;">📡</span>
-                    <h3
-                        style="font-family: 'Archivo Black'; font-size: clamp(0.65rem, 1.8vh, 1.1rem); margin: 0 0 0.3vh 0;">
+                <div class="block block-lime budget-card"
+                    style="grid-column: span 6; grid-row: span 3; padding: 12px; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+                    <span class="demand-icon" style="font-size: clamp(1rem, 2vw, 2rem); margin-bottom: 4px;">📡</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: clamp(0.6rem, 1.2vw, 1rem); margin: 0 0 4px 0;">
                         COMMUNICATION & OUTREACH</h3>
-                    <p style="font-size: clamp(0.55rem, 1.2vh, 0.85rem); line-height: 1.3; margin: 0;">Internet
+                    <p style="font-size: clamp(0.3rem, 0.7vw, 0.6rem); line-height: 1.3; margin: 0;">Internet
                         connectivity, mobile data, social media promotion, press materials, and digital outreach tools.
                         Ensuring real-time documentation and global reach of climate action coverage.</p>
                 </div>
 
-                <div class="block block-dark"
-                    style="grid-column: span 6; grid-row: span 3; padding: 1.2vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
-                    <span class="demand-icon"
-                        style="font-size: clamp(1.2rem, 3vh, 2.5rem); margin-bottom: 0.5vh;">🎫</span>
-                    <h3
-                        style="font-family: 'Archivo Black'; font-size: clamp(0.65rem, 1.8vh, 1.1rem); margin: 0 0 0.3vh 0;">
+                <div class="block block-dark budget-card"
+                    style="grid-column: span 6; grid-row: span 3; padding: 12px; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+                    <span class="demand-icon" style="font-size: clamp(1rem, 2vw, 2rem); margin-bottom: 4px;">🎫</span>
+                    <h3 style="font-family: 'Archivo Black'; font-size: clamp(0.6rem, 1.2vw, 1rem); margin: 0 0 4px 0;">
                         TICKETS & ACCREDITATION</h3>
-                    <p style="font-size: clamp(0.55rem, 1.2vh, 0.85rem); line-height: 1.3; margin: 0;">Official event
+                    <p style="font-size: clamp(0.3rem, 0.7vw, 0.6rem); line-height: 1.3; margin: 0;">Official event
                         access, press credentials, and necessary permits for comprehensive COP30 documentation and
                         Indigenous Initiative + Massive Attack coverage.</p>
                 </div>
 
-                <div class="block block-pink"
-                    style="grid-column: span 12; grid-row: span 4; display: flex; align-items: center; justify-content: space-between; padding: 1vh 3vh; overflow: visible; z-index: 300;">
-                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                <div class="block block-pink budget-total"
+                    style="grid-column: span 12; grid-row: span 4; display: flex; align-items: center; justify-content: space-evenly; overflow: hidden; z-index: 300; flex-wrap: wrap;">
+                    <div style="display: flex; flex-direction: column; justify-content: space-evenly;">
                         <h3
-                            style="font-family: 'Syne'; font-size: clamp(1.8rem, 5vh, 4rem); color: white; margin: 0; line-height: 1; white-space: nowrap;">
+                            style="font-family: 'Syne'; font-size: clamp(1.4rem, 3.5vw, 3.5rem); color: white; margin: 0; line-height: 1;">
                             TOTAL: $500 USD</h3>
                         <p
-                            style="font-size: clamp(0.6rem, 1.4vh, 0.9rem); margin: 0.5vh 0 0 0; color: white; opacity: 0.9;">
+                            style="font-size: clamp(0.55rem, 1vw, 0.85rem); margin: 4px 0 0 0; color: white; opacity: 0.9;">
                             Grassroots funding for youth-led climate documentation</p>
                     </div>
                     <a href="https://drive.google.com/file/d/1-g2iwmRo50DlIYHG88KgasDiqpHok9VP/view?usp=sharing"
                         target="_blank" rel="noopener noreferrer"
-                        style="background: white; color: var(--pink); padding: 1.5vh 3vh; font-family: 'Archivo Black'; font-size: clamp(0.7rem, 1.8vh, 1.1rem); text-decoration: none; border: 3px solid white; transition: 0.3s; white-space: nowrap; margin-left: 2vh; position: relative; z-index: 500;"
+                        style="background: white; color: var(--pink); padding: 10px 20px; font-family: 'Archivo Black'; font-size: clamp(0.65rem, 1.2vw, 1rem); text-decoration: none; border: 3px solid white; transition: 0.3s; white-space: nowrap; flex-shrink: 0; position: relative; z-index: 500;"
                         onmouseover="this.style.background='var(--lime)'; this.style.color='var(--obsidian)'"
                         onmouseout="this.style.background='white'; this.style.color='var(--pink)'">VIEW FULL PDF</a>
                 </div>
